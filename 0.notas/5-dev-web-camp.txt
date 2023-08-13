@@ -10,3 +10,11 @@ npm run dev
 - para que se compile el css, el js y las imagenes (se genera la carpeta /public/build con todo su contenido) 
 
 -----
+
+VIDEO 673 
+
+@mixin contenedor-sm {
+    width: min(95%, 60rem); // defino el width y el max-width en una misma linea
+    * existe max()
+    * existe clamp()
+}
