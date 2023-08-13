@@ -1,0 +1,306 @@
+22/6/23 -> Creé el repo remoto en github y lo sincronizo con el proyecto:
+
+git init 
+git config user.email "lionel.prats.c@gmail.com"
+git config user.name "lionel-prats"
+git add .
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/lionel-prats/lp-2023-uptask-php-mysql-mvc.git
+git push -u origin main
+
+----- 
+
+VIDEO 563 
+
+npm i 
+-> para que se instalen las dependencias de npm (se instala /node_modules)
+
+composer update 
+-> se instala /vendor (el composer.json en este punto no tiene librerias externas cargadas - solo tenemos el autoload -; si las tuviera, habria que correr composer install para que se instalen dentro de /vendor)
+
+----- 
+
+* creo la base "uptask_mvc" desde Heidi
+
+-----
+
+ya de salida instalo la libreria para  leer variables de entorno definidas en el .env y hago las configuraciones que explico el profesor al final del proyecto "appsalon"
+
+1) composer require vlucas/phpdotenv
+-> se creó la dependencia en composer.json
+-> se creó /vlucas/phpdotenv en /vendor
+
+2) creo archivo con las variables de entorno de mi proyecto (/includes/.env)
+
+3) seteo las variables de entorno para la conexion a la DB (ver .env)
+
+4) en /includes/app.php instancio la dependencia instalada de vlucas\phpdotenv y algunas configuraciones mas, para poder leer las variables de entorno en el .env y que se agreguen a la variable superglobal de PHP $_ENV
+
+5) edito /includes/database.php -> paso las variables de entorno definidas en .env a la conexion a la base de datos, a traves de la variable superglobal $_ENV (que ya tiene cargadas esas variables definidas en .env) (ver /includes/database.php)
+
+-----
+
+VIDEO 564
+
+ya de salida modifico la sigiente linea del metodo comprobarRutas() de la clase Router (es una de las modificaciones que hizo el profesor sobre el final de "appsalon", relativa a las configuraciones necesarias para que el proyecto funcione en produccion) 
+
+public function comprobarRutas() {
+    // $currentUrl = $_SERVER['PATH_INFO'] ?? '/';
+    $currentUrl = $_SERVER['REQUEST_URI'] ?? '/';
+}
+
+*** al final revertí este cambio porque en local comprobé que podía traerme problemas con algunas rutas (calculo que la propiedad $_SERVER['REQUEST_URI'] debe existir en servidores remotos, o algo por el estilo)
+
+----- 
+
+VIDEO 577
+
+Creo la tabla usuarios en la DB 
+
+CREATE TABLE IF NOT EXISTS usuarios (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  nombre varchar(30) DEFAULT NULL,
+  email varchar(30) DEFAULT NULL,
+  password varchar(60) DEFAULT NULL,
+  token varchar(32) DEFAULT NULL,
+  confirmado tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8
+
+----- 
+
+VIDEO 583
+
+comando para reiniciar reinicializar resetear el AUTOINCREMENT de id de usuarios (PRIMARY KEY PK)
+ALTER TABLE usuarios AUTO_INCREMENT = 1;
+
+----- 
+
+VIDEO 584
+
+* unset($usuario->password2); // funcion PHP para eliminar una propiedad de un objeto u array (indexado u asociativo)
+
+* uniqid(); -> funcion PHP para generar un hash muy poco seguro -> 64964e72a58f5
+
+* md5($variable); 
+  -> funcion PHP para que hashea el string o int que le pasemos como argumento (no es la mejor opcion) 
+  -> si le pasamos el string "pepito" siempre va a retornar el mismo hash 
+  -> el hash siempre sera de 32 caracteres
+
+----- 
+
+VIDEO 585 
+
+* Instalamos la dependencia PHP Mailer 
+composer require phpmailer/phpmailer
+* composer update -> para que se actualizen el composer.json y el composer.lock
+*** se agrega la dependencia al composer.jon 
+*** se crea /vendor/phpmailer 
+
+----- 
+
+VIDEO 586 
+
+pasé las credenciales de MailTrap al .env para poder subir /classes/Email.php a github
+
+----- 
+
+VIDEO 599 
+
+CRM -> Customer Relationship Management (Gestión de la Relación con el Cliente)
+
+----- 
+
+VIDEO 606
+
+Creé la tabla proyectos con ayuda de Chat GTP vvv 
+
+* en mysql, necesito crear la tabla proyectos
+* con los campos:
+id int(11) NOT NULL AUTO_INCREMENT,
+proyecto VARCHAR(60) DEFAULT NULL,
+url VARCHAR(32) DEFAULT NULL,
+propietarioId INT(11)
+
+* id es PK
+* propietarioId es FK (apunta a la tabla usuarios, campo id)
+* proyectos tiene que tener el constrait ON DELETE CASCADE 
+
+como seria la consulta sql? vvv
+
+CREATE TABLE proyectos (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  proyecto VARCHAR(60) DEFAULT NULL,
+  url VARCHAR(32) DEFAULT NULL,
+  propietarioId INT(11),
+  PRIMARY KEY (id),
+  FOREIGN KEY (propietarioId) REFERENCES usuarios(id) ON DELETE CASCADE
+);
+
+-----
+
+VIDEO 614
+
+&#43; -> entidad HTML -> "+"
+
+----- 
+
+VIDEO 615
+
+JavaScript -> IIFE -> Inmediately Invoke Function Expression vvv 
+
+(function() {
+    const hola = "hola mundo";
+})();
+
+* es como definicr un scope para un bloque de codigo
+* en este video, el profesor define este codigo en tareas.js 
+* y compruebo que hola no esta disponible en app.js
+* tambien compruebo que hola no esta disponible fuera de la IIFE
+* tambien compruebo que puedo declarar una constante o variable hola en app.js, sin que la consola me tire error
+
+----- 
+
+VIDEO 618
+
+Modelo de concurrencia y loop de eventos en JS vvv
+https://developer.mozilla.org/es/docs/Web/JavaScript/Event_loop
+
+----- 
+
+VIDEO 621
+
+DOM Traversing (recorrer el DOM)
+
+* algunos ejemplos de como recorrer el DOM a partir del elemento capturado "referencia" e insertar elementos desde JS vvv 
+
+referencia.insertAdjacentElement('afterend', alerta);
+referencia.parentElement.insertBefore(alerta, referencia.nextElementSibling)
+referencia.parentElement.insertBefore(alerta, referencia);
+
+-----
+
+VIDEO 622 
+
+CREATE TABLE tareas (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  nombre VARCHAR(60) DEFAULT NULL,
+  estado TINYINT(1) DEFAULT NULL,
+  proyectoId INT(11),
+  PRIMARY KEY (id),
+  FOREIGN KEY (proyectoId) REFERENCES proyectos(id) ON DELETE CASCADE
+);
+
+----- 
+
+VIDEO 626
+
+Del lado del cliente, en JavaScript: 
+
+- window.location -> nos proporciona informacion acerca de la url de la vista que se esta renderizando
+
+----- 
+
+- De la siguiente forma, en la constante proyecto generamos un objeto cuyas propiedades son los parametros que llegan por URL en una peticion vvv
+
+----- 
+
+const proyectoParams = new URLSearchParams(window.location.search);
+const proyecto = Object.fromEntries(proyectoParams.entries());
+
+-----
+
+Ejemplo: http://localhost:3000/proyecto?id=5cd20915df05da4d3c4a64c2719f0b7a&mono=rojo;
+const proyectoParams = new URLSearchParams(window.location.search);
+const proyecto = Object.fromEntries(proyectoParams.entries());
+proyecto = {
+  id: "5cd20915df05da4d3c4a64c2719f0b7a",
+  mono: "rojo"
+} 
+
+----- 
+
+VIDEO 637 
+
+VIRTUAL DOM 
+
+1) Ni bien se carga /src/js/tareas.js (con la carga de /proyecto), define la variable global tareas para que esté disponible en todo el código javascript vvv
+
+let tareas
+
+* esta variable, va a contener el listado de tareas que viene del fetch al server, y que se van a renderizar en la vista de un proyecto
+* luego de que se crea una tarea, dentro de la misma funcion agregarTarea(), creo un objeto js con el formato de los objetos de la variable tarea, y añado este objeto a la lista de objetos ya cargados en tarea.
+* luego, ejecuto nuevamente mostrarTareas() para que se renderize el listado de tareas actualizado, sin refrescar la pagina, y ejecutando antes del nuevo renderizado la funcion limpiarTareas() (creada en este video), para "vaciar" el <ul id="listado-tareas">, que es quien contiene los <li> con las tareas de un proyecto.
+
+*** me acaba de caer la ficha, de que tareas, pese a que ya termino de renderizarse la pagina, sigue guardando en memoria el listado de tareas, y por eso puedo reutilizar la variable luego de crear una nueva tarea, para actualizar el DOM (Domingo 16/7/23) 
+
+-----
+
+VIDEO 638 
+
+/src/js/tareas.js vvv 
+
+btnEstadoTarea.ondblclick = function() {
+    cambiarEstadoTarea(tarea)
+}
+
+* de esta forma, a un elemento HTML creado con scripting, le agrego un listener "doble click" (si reviso el HTML en la consola del navegador no se visualiza)
+
+-----
+
+VIDEO 639 
+
+* Forma de visualizar por consola la info que quiero enviar al servidor construyendo un FormData vvv
+
+const datos = new FormData(); 
+datos.append('id', id);
+datos.append('nombre', nombre);
+for (let valor of datos.values()){
+    console.log(valor);
+}
+
+-----
+
+VIDEO 642 
+
+alerta nativo de JavaScript (retorna TRUE o FALSE) vvv 
+
+const respuesta = confirm("¿Eliminar Tarea?")
+console.log(respuesta);
+
+Instalamos Sweet Alert via CDN
+
+documentacion vvv
+https://sweetalert2.github.io/
+
+-----
+
+VIDEO 643
+
+Use la libreria Animate.css combinada con SweetAlert para tener una ventana de alerta animada 
+
+documentacion Animate.css vvv 
+https://animate.style/
+
+----- 
+
+VIDEO 656
+
+* console.log(document.body.clientWidth); // ancho en pixeles de <body>
+* console.log(document.body.clientHeight); // alto en pixeles de <body>
+
+const capturaDePrueba = document.querySelector("#agregar-tarea")
+* console.log(capturaDePrueba.clientWidth); // ancho en pixeles de <element id="agregar-tarea">
+* console.log(capturaDePrueba.clientHeight); // ancho en pixeles de <element id="agregar-tarea">
+
+* El objeto document hace referencia al codigo HTML 
+* El objeto window hace referencia atodo el document + todo el javascript
+
+-----
+
+VIDEO 665 
+
+Ultima seccion del proyecto 
+Explica una de las formas de implementar modo oscuro, en este caso, a partir de las preferencias del usuario en su sistema operativo 
+*** por alguna razon, no puedo cambiar a modo oscuro mi sistema operativo (puede que tenga que ver con no tener corriendo Windows original)
