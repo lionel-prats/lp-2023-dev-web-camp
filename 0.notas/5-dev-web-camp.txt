@@ -1,0 +1,12 @@
+VIDEO 671
+
+npm install o npm i 
+- Se instala node_modules con todas las dependencias del package.json
+
+composer install
+- Se instala /vendor con las dependencias del composer.json
+
+npm run dev 
+- para que se compile el css, el js y las imagenes (se genera la carpeta /public/build con todo su contenido) 
+
+-----
