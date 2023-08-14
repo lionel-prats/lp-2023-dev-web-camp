@@ -50,13 +50,11 @@
 @mixin contenedor {
     width: min(95%, 120rem); // defino el width y el max-width en una misma linea
     margin: 0 auto;
-    border: 1px solid #000000;
 }
 
 @mixin contenedor-sm {
     width: min(95%, 60rem); // defino el width y el max-width en una misma linea
     margin: 0 auto;
-    border: 1px solid #000000;
 }
 
 @mixin headings {

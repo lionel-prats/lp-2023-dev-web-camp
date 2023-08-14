@@ -24,6 +24,7 @@
         </div>
         <input type="submit" value="Iniciar Sesión" class="formulario__submit">
     </form>
+    
     <div class="acciones">
         <a href="/registro" class="acciones__enlace">¿Aún no tienes cuenta? Obtener una</a>
         <a href="/registro" class="acciones__enlace">¿Olvidaste tu password?</a>
