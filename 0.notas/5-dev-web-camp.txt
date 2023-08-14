@@ -18,3 +18,16 @@ VIDEO 673
     * existe max()
     * existe clamp()
 }
+
+----- 
+
+VIDEO 674 
+
+https://developer.mozilla.org/es/docs/Web/CSS/Attribute_selectors
+
+slector de atributo SASS
+todos los elementos con clase terminada en "__heading" -> class="xxx__heading"
+
+[class$="__heading"] {
+    @include m.nombre-pagina;
+}

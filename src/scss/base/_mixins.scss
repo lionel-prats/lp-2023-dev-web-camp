@@ -58,3 +58,15 @@
     margin: 0 auto;
     border: 1px solid #000000;
 }
+
+@mixin headings {
+    margin: 2rem 0;
+    font-family: v.$fuente-principal;
+    font-weight: v.$black;
+}
+
+@mixin nombre-pagina {
+    @include headings;
+    margin: 6rem 0 3rem 0;
+    text-align: center;
+}

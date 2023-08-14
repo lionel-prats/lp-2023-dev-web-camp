@@ -2,7 +2,7 @@
 @use 'mixins' as m;
 
 h1, h2, h3 {
-    
+    @include m.headings;
 }
 
 h1 {
@@ -16,4 +16,9 @@ h3 {
 }
 .text-center {
     text-align: center;
+}
+
+// todos los elementos con clase terminada en "__heading" -> class="xxx__heading"
+[class$="__heading"] {
+    @include m.nombre-pagina;
 }
