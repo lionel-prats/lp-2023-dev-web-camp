@@ -57,6 +57,6 @@
     
     <div class="acciones">
         <a href="/login" class="acciones__enlace">¿Ya tienes cuenta? Iniciar sesión</a>
-        <a href="/registro" class="acciones__enlace">¿Olvidaste tu password?</a>
+        <a href="/olvide" class="acciones__enlace">¿Olvidaste tu password?</a>
     </div>
 </main>

@@ -27,6 +27,6 @@
     
     <div class="acciones">
         <a href="/registro" class="acciones__enlace">¿Aún no tienes cuenta? Obtener una</a>
-        <a href="/registro" class="acciones__enlace">¿Olvidaste tu password?</a>
+        <a href="/olvide" class="acciones__enlace">¿Olvidaste tu password?</a>
     </div>
 </main>
