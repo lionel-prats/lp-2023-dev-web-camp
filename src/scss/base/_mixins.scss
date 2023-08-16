@@ -48,7 +48,7 @@
 }
 
 @mixin contenedor {
-    width: min(95%, 120rem); // defino el width y el max-width en una misma linea
+    width: min(95%, 140rem); // defino el width y el max-width en una misma linea
     margin: 0 auto;
 }
 
@@ -73,5 +73,9 @@
     font-size: clamp($min, 10vw,$max);
 }
 
-@mixin texto-degradado {
+@mixin texto-degradado($inicio, $final) { /* degradado en los caracteres del logo - VIDEO 682 */
+    background: linear-gradient(to right, $inicio, $final);
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
 }
