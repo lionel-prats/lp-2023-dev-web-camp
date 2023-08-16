@@ -12,5 +12,40 @@
             url("../img/header.avif") 1x,
             url("../img/header.webp") 1x,
             url("../img/header.jpg") 1x
-        );
+        )
+    ;
+    
+    &__contenedor {
+        @include m.contenedor;
+        border: 1px solid red;
+    }
+    &__navegacion {
+        border: 1px solid yellow;
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        padding: 5rem 0;
+        @include m.tablet {
+            justify-content: flex-end
+        };
+    }
+    &__enlace {
+        font-size: 1.4rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: v.$blanco;
+        &:hover {
+            color: v.$azul;
+        }
+    }
+    &__contenido {
+        padding-top: 10rem;
+        border: 1px solid orangered;
+        @include m.tablet {
+            padding-top: 5rem;
+        };
+    }
+    &__logo {
+        @include m.texto-fluido(2rem, 8rem) /* font-size responsive - VIDEO 681 */
+    }
 }
