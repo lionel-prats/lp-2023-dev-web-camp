@@ -14,6 +14,9 @@
             url("../img/header.jpg") 1x
         )
     ;
+    background-repeat: no-repeat;
+    background-size: 400px, 400px, cover, cover;
+    background-position: top left, right bottom, center center, center center;
     
     &__contenedor {
         @include m.contenedor;
