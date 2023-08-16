@@ -31,3 +31,6 @@ todos los elementos con clase terminada en "__heading" -> class="xxx__heading"
 [class$="__heading"] {
     @include m.nombre-pagina;
 }
+
+&= -> que termine con ...  
+*= -> que contenga ...
