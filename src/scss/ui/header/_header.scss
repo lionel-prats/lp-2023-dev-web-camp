@@ -15,15 +15,13 @@
         )
     ;
     background-repeat: no-repeat;
-    background-size: 400px, 400px, cover, cover;
-    background-position: top left, right bottom, center center, center center;
+    background-size: 400px, 400px, cover, cover; /* grafico, grafico, gradient, header.jpg - VIDEO 683 */
+    background-position: top left, right bottom, center center, center center; /* grafico, grafico, gradient, header.jpg - VIDEO 683 */
     
     &__contenedor {
         @include m.contenedor;
-        border: 1px solid red;
     }
     &__navegacion {
-        border: 1px solid yellow;
         display: flex;
         justify-content: center;
         gap: 2rem;
@@ -43,7 +41,6 @@
     }
     &__contenido {
         padding-top: 10rem;
-        border: 1px solid orangered;
         @include m.tablet {
             padding-top: 5rem;
         };

@@ -79,3 +79,13 @@
     color: transparent;
     -webkit-text-fill-color: transparent;
 }
+
+@mixin logo {
+    margin-bottom: 2rem;
+    text-align: center;
+    color: v.$blanco;
+    @include desktop {
+        margin: 0;
+        text-align: left;
+    };
+}
