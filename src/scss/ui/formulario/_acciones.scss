@@ -5,6 +5,11 @@
     justify-content: space-between;
     margin-top: 3rem;
 
+    &--centrar {
+        @extend .acciones; // con esta sintaxis .acciones--centrar hereda las propiedades de la clase .acciones (VIDEO 690) (se lo puede chequear en el css compilado app.css)
+        justify-content: center;
+    }
+
     &__enlace {
         color: v.$negro;
         font-size: 1.4rem;
