@@ -110,6 +110,7 @@ class AuthController {
         ]);
     }
 
+    // formulario para recuperar el password
     public static function olvide(Router $router) {
         $alertas = [];
         
@@ -134,7 +135,6 @@ class AuthController {
                     $email = new Email( $usuario->email, $usuario->nombre, $usuario->token );
                     $email->enviarInstrucciones();
 
-
                     // Imprimir la alerta
                     // Usuario::setAlerta('exito', 'Hemos enviado las instrucciones a tu email');
 
@@ -155,6 +155,7 @@ class AuthController {
         ]);
     }
 
+    // formulario y procesamiento para cambiar la contraseña
     public static function reestablecer(Router $router) {
 
         $token = s($_GET['token']);
@@ -192,7 +193,7 @@ class AuthController {
 
                 // Redireccionar
                 if($resultado) {
-                    header('Location: /');
+                    header('Location: /login');
                 }
             }
         }
