@@ -59,6 +59,7 @@ class AuthController {
        
     }
 
+    // formulario de registo + INSERT en la db
     public static function registro(Router $router) {
         $alertas = [];
         $usuario = new Usuario;
@@ -205,6 +206,7 @@ class AuthController {
         ]);
     }
 
+    // mensaje que notifica al usuario que se ha registrado correctamente, y que tiene que validarse con el mail que le mandamos 
     public static function mensaje(Router $router) {
 
         $router->render('auth/mensaje', [

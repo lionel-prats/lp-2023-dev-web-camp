@@ -54,3 +54,58 @@ print_r($objeto);
 echo $array["nombre"] . "<br>";
 echo $objeto->edad;
 exit;
+
+----- 
+
+VIDEO 689 
+
+CONFIGURACION DE MAILTRAP (server de mails para testing) vvv
+
+1. Borré el Inbox creado anteriormente (esa especie de casilla de correo a donde llegan los mails cada vez que, por ejemplo, registro un nuevo usuario) ya que la cuenta gratis de Mailtrap permite tener solo 1 Inbox.
+
+2. Creé un Inbox nuevo llamado "DevWebCamp"
+
+3. Click sobre el nombre del Inbox para cambiar la integración.
+
+4. Cambio la integración a PHPMailer
+
+5. Mailtrap me da estas credenciales para configurar PHPMailer en mi proyecto vvv 
+
+"Use the following setting to configure PHPMailer":
+$phpmailer = new PHPMailer();
+$phpmailer->isSMTP();
+$phpmailer->Host = 'sandbox.smtp.mailtrap.io';
+$phpmailer->SMTPAuth = true;
+$phpmailer->Port = 2525;
+$phpmailer->Username = '29b1ed5b72f7bf';
+$phpmailer->Password = '********f3db';
+
+6. Hay que darle click a "Show Credentials" para que se muestre el password y se pueda realizar la configuración correctamente vvv 
+
+SMTP
+Host:
+sandbox.smtp.mailtrap.io
+Port:
+25 or 465 or 587 or 2525
+Username:
+29b1ed5b72f7bf
+Password:
+fe9bdf60a5f3db
+Auth:
+PLAIN, LOGIN and CRAM-MD5
+TLS:
+Optional (STARTTLS on all ports)
+
+7. Seteo las variables de configuracitn en el .env vvv
+
+EMAIL_HOST=sandbox.smtp.mailtrap.io
+EMAIL_PORT=2525
+EMAIL_USER=29b1ed5b72f7bf
+EMAIL_PASS=fe9bdf60a5f3db
+
+8. Como hice cambios, el profesor recomienda detener el servidor local y volver a levantarlo
+
+
+
+
+
