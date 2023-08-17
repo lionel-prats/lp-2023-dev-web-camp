@@ -34,3 +34,23 @@ todos los elementos con clase terminada en "__heading" -> class="xxx__heading"
 
 &= -> que termine con ...  
 *= -> que contenga ...
+
+----- 
+
+VIDEO 688 
+
+Convertir un array asociativo en un objeto utilizando el tipo de dato "stdClass" que representa un objeto vacío genérico vvv
+
+$array = [
+    "nombre" => "Lionel",
+    "edad" => 37,
+];
+
+$objeto = (object)$array;
+
+echo "<pre>";
+print_r($array);
+print_r($objeto);
+echo $array["nombre"] . "<br>";
+echo $objeto->edad;
+exit;
