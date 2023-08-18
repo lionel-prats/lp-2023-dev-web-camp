@@ -24,7 +24,7 @@
                 Registrados
             </span>
         </a>
-        <a href="/admin/registrados" class="dashboard__enlace">
+        <a href="/admin/regalos" class="dashboard__enlace">
             <i class="fa-solid fa-gift dashboard__icono"></i><!-- gift -->
             <span class="dashboard__menu-texto">
                 Regalos
