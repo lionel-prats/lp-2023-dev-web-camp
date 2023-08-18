@@ -105,7 +105,123 @@ EMAIL_PASS=fe9bdf60a5f3db
 
 8. Como hice cambios, el profesor recomienda detener el servidor local y volver a levantarlo
 
+----- 
 
+VIDEO 693 
+
+REPASO DE router.php 
+
+* por cada "endpoint" que defino en el router (index.php), en verdad estoy ejecutando las funciones get() y post() de la clase Router, definida en Router.php, que van completando los atributos de la misma clase $getRoutes y $postRoutes, que son arrays asociativos donde la clave es cada ruta definida, y el valor es un array de 2 strings: el 1ero. es la clase (controlador) que se tiene que ejecutar y el segundo es el metodo de ese controlador que se tiene que ejecutar vvv
+
+public array $getRoutes = array(6) {
+  ["/login"]=>
+  array(2) {
+    [0]=>
+    string(26) "Controllers\AuthController"
+    [1]=>
+    string(5) "login"
+  }
+  ["/registro"]=>
+  array(2) {
+    [0]=>
+    string(26) "Controllers\AuthController"
+    [1]=>
+    string(8) "registro"
+  }
+  ["/olvide"]=>
+  array(2) {
+    [0]=>
+    string(26) "Controllers\AuthController"
+    [1]=>
+    string(6) "olvide"
+  }
+  ["/reestablecer"]=>
+  array(2) {
+    [0]=>
+    string(26) "Controllers\AuthController"
+    [1]=>
+    string(12) "reestablecer"
+  }
+  ["/mensaje"]=>
+  array(2) {
+    [0]=>
+    string(26) "Controllers\AuthController"
+    [1]=>
+    string(7) "mensaje"
+  }
+  ["/confirmar-cuenta"]=>
+  array(2) {
+    [0]=>
+    string(26) "Controllers\AuthController"
+    [1]=>
+    string(9) "confirmar"
+  }
+}
+
+public array $postRoutes = array(5) {
+  ["/login"]=>
+  array(2) {
+    [0]=>
+    string(26) "Controllers\AuthController"
+    [1]=>
+    string(5) "login"
+  }
+  ["/logout"]=>
+  array(2) {
+    [0]=>
+    string(26) "Controllers\AuthController"
+    [1]=>
+    string(6) "logout"
+  }
+  ["/registro"]=>
+  array(2) {
+    [0]=>
+    string(26) "Controllers\AuthController"
+    [1]=>
+    string(8) "registro"
+  }
+  ["/olvide"]=>
+  array(2) {
+    [0]=>
+    string(26) "Controllers\AuthController"
+    [1]=>
+    string(6) "olvide"
+  }
+  ["/reestablecer"]=>
+  array(2) {
+    [0]=>
+    string(26) "Controllers\AuthController"
+    [1]=>
+    string(12) "reestablecer"
+  }
+}
+
+* Luego, en index.php, vemos que se ejecuta el metodo $router->comprobarRutas();
+* La revisión sigue con comentarios en Router.php, repasando el VIDEO 401 y 402
+
+* COMPRENSION DEFINITIVA DE COMO EL ARRAY QUE PASAMOS A LA VISTA DESDE EL CONTROLADOR LO PODEMOS ACCEDER EN LA VISTA COMO VARIABLES INDIVIDUALES vvv
+
+$view_data = [
+    "nombre" => "Lionel",
+    "apellido" => "Prats",
+    "edad" => 37
+];
+foreach ($view_data as $key => $value) {
+    $$key = $value;
+}
+echo $nombre . "<br>";
+echo $apellido . "<br>";
+echo $edad . "<br>";
+
+exit;
+
+----- 
+
+* funcion PHP (a partir de version 8) para buscar un suubstring dentro de un string
+* lo utilizamos en Router->render() para switchear entre las vistas del dashboard de administrador y el resto de las vistas de la app 
+* retorna un bool vvv
+
+str_contains($url_actual, "/admin") 
 
 
 
