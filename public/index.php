@@ -34,4 +34,4 @@ $router->get('/confirmar-cuenta', [AuthController::class, 'confirmar']);
 $router->get('/admin/dashboard', [DashboardController::class, 'index']);
 
 
-$router->comprobarRutas();
+$router->comprobarRutas(); 

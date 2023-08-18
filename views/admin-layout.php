@@ -14,7 +14,7 @@
         <?php 
             include_once __DIR__ .'/templates/admin-header.php';
         ?>
-        <div class="dashboard__grid">
+        <div class="dashboard__grid" style="border: 1px solid red;">
             <?php
                 include_once __DIR__ .'/templates/admin-sidebar.php';  
             ?>

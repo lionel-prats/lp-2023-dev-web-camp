@@ -125,3 +125,16 @@
         display: none;
     }
 }
+
+@mixin enlace {
+    all: unset; // resetea todos los estilos que pueda tener un elemento (VIDEO 694)
+    // border: none; (VIDEO 694)
+    font-size: 1.4rem;
+    font-weight: v.$bold;
+    text-transform: uppercase;
+    // background-color: transparent; (VIDEO 694)
+    color: v.$blanco;
+    &:hover {
+        color: v.$azul;
+    }
+}
