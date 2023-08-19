@@ -225,4 +225,13 @@ str_contains($url_actual, "/admin")
 
 ----- 
 
-VIDEO ?
+VIDEO 704
+
+tags.js -> JAVASCRIPT 
+
+e.keyCode -> propiedad del evenvto JS que retorna un codigo numerico de una tecla presionada. Con el evento "keypress" funciona bien, ya que si imprimo por consola cada evento, se imprime el keyCode de la tecla presionada en tiempo real
+
+tagsInputs.addEventListener("keypress", guardarTag)
+function guardarTag(e) {
+    console.log(e.keyCode);
+}

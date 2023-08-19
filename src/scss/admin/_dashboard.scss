@@ -130,7 +130,6 @@
     }
     
     &__formulario {
-        border: 1px solid #000000;
         @extend .dashboard__contenedor;
         @include m.contenedor-md;
     }
