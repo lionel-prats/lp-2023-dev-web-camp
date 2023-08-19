@@ -35,12 +35,14 @@ class Router
         }
     }
 
+    // este metodo siempre lo mandan a ejecutar los controladores cuando renderizan una vista
     public function render($view, $datos = [])
     {
         // cuando se renderiza una vista "pasa" adentro de esta funcion (VIDEO 693)
         // demostracion (descomentar este echo y ver lo que pasa...) vvv
         // echo "<h1 style='color: red;'>Pitrola</h1>";
         
+        // convertimos las propiedades del array asociativo con info que mandan los controladores a las vistas en variables individuales (destructuramos el array)
         foreach ($datos as $key => $value) {
             // de esta forma voy generando variables con los nombres de los atributos que llegan en $datos (que es el array asociativo con data que mandamos desde los metodos que se ejecutan desde los distintos controladores segun la vista que se este peticionando desde la URL del navegador)
             // entonces, estas variables tienen el mismo contenido que que el valor asociado a la propiedad en $datos y quedan disponibles al igual que $contenido para poder hacer uso en la vista (repaso VIDEO 402)
@@ -49,7 +51,7 @@ class Router
         }
 
         ob_start(); // inicia un almacenamiento en memoria del contenido del include_once de $view de la linea de abajo (repaso del VIDEO 401)
-
+    
         include_once __DIR__ . "/views/$view.php";
 
         // en $contenindo almacenamos la "ejecucion" de ob_start(), o sea, el include_once de $view en la linea de arriba (repaso del VIDEO 401)
@@ -58,6 +60,8 @@ class Router
         $contenido = ob_get_clean(); // Limpia el Buffer
 
         // Utilizar el Layout de acuerdo a la URL (VIDEO 693)
+
+        // capturamos lo que venga por URL (despues de localhost:3000/)
         $url_actual = $_SERVER['PATH_INFO'] ?? '/';
         
         if(str_contains($url_actual, "/admin")) {

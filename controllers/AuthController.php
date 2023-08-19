@@ -217,7 +217,6 @@ class AuthController {
 
     // mensaje que notifica al usuario que se ha registrado correctamente, y que tiene que validarse con el mail que le mandamos 
     public static function mensaje(Router $router) {
-
         $router->render('auth/mensaje', [
             'titulo' => 'Cuenta Creada Exitosamente'
         ]);
