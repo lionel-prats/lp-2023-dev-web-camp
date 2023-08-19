@@ -37,6 +37,10 @@
         border-radius: .5rem;
     }
 
+    &__input--file {
+        border: none;
+    }
+
     &__submit {
         @include m.boton(v.$azul, v.$blanco);
         width: auto;
