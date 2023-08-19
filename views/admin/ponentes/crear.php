@@ -26,7 +26,7 @@
         <input 
             type="submit" 
             value="Registrar Ponente"
-            class="formulario__submit"    
+            class="formulario__submit formulario__submit--registrar"    
         >
     </form>
 </div>

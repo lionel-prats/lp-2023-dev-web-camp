@@ -12,7 +12,7 @@ class PonentesController {
     }
     public static function crear(Router $router) {
 
-        $alertas = [];
+        $alertas = ["error" => ["prueba"]];
 
         $router->render("admin/ponentes/crear", [
             "titulo" => "Registrar Ponente",

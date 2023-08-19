@@ -52,6 +52,11 @@
     margin: 0 auto;
 }
 
+@mixin contenedor-md {
+    width: min(95%, 80rem); // defino el width y el max-width en una misma linea
+    margin: 0 auto;
+}
+
 @mixin contenedor-sm {
     width: min(95%, 60rem); // defino el width y el max-width en una misma linea
     margin: 0 auto;
@@ -137,4 +142,9 @@
     &:hover {
         color: v.$azul;
     }
+}
+
+@mixin shadow {
+    // https://getcssscan.com/css-box-shadow-examples
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }

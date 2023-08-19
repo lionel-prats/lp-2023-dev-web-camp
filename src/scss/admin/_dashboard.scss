@@ -105,10 +105,12 @@
         };
     }
 
+    // estilos vistas dashboard administrador
     &__contenedor-boton {
         @include m.tablet {
             display: flex;
-            justify-content: flex-end
+            justify-content: flex-end;
+            margin-bottom: 5rem
         };
     }
     &__boton {
@@ -119,6 +121,21 @@
             width: auto
         };
     }
+
+    &__contenedor {
+        @include m.shadow;
+        padding: 2rem;
+        border-radius: 1rem;
+        background-color: v.$blanco;
+    }
+    
+    &__formulario {
+        border: 1px solid #000000;
+        @extend .dashboard__contenedor;
+        @include m.contenedor-md;
+    }
+    // FIN estilos vistas dashboard administrador
+
     // FIN dashboard__grid
 
 }

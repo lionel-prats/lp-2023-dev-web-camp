@@ -2,8 +2,21 @@
 @use "base/mixins" as m;
 
 .formulario {
+    border: 1px solid red;
     display: flex;
     flex-direction: column;
+
+    &__fieldset {
+        padding: 0;
+        margin-top: 1rem;
+        border: none;
+    }
+
+    &__legend {
+        margin-bottom: 2rem;
+        font-size: 2.2rem;
+        color: v.$gris;
+    }
 
     &__campo {
         display: flex;
@@ -28,5 +41,9 @@
         @include m.boton(v.$azul, v.$blanco);
         width: auto;
         align-self: flex-start; // el elemento hijo de un flex se alinea a si mismo respecto al cross axis
+
+        &--registrar {
+            width: 100%;
+        }
     }
 }
