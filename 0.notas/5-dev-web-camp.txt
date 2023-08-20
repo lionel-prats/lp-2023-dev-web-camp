@@ -242,8 +242,84 @@ VIDEO 706
 
 CSS vvv 
 
-De una manera muy simple deja fijo el Header superior (similar a position: sricky)
+De una manera muy simple deja fijo el Header superior (similar a position: sticky)
 
 -----
 
-VIDEO ?
+VIDEO 708
+
+superglobal $_FILE -> array global nativo de PHP, como $_SERVER, $_SESSION, etc.
+$_FILE es para enviar archivos al servidor.
+
+- Ejemplo 1: submiteo un formulario al server con 2 inputs type="file" con los names "name_1_del_input_file" y "name_2_del_input_file" respectivamente...
+En este primer caso mando ambos inputs vacíos. Debugueo $_FILEen el controlador que recibe la petición. El debug vvv
+
+Array
+(
+    [name_1_del_input_file] => Array
+        (
+            [name] => 
+            [full_path] => 
+            [type] => 
+            [tmp_name] => 
+            [error] => 4
+            [size] => 0
+        )
+    [name_2_del_input_file] => Array
+        (
+            [name] => 
+            [full_path] => 
+            [type] => 
+            [tmp_name] => 
+            [error] => 4
+            [size] => 0
+        )
+)
+
+- Ejemplo 2: submiteo un formulario al server con 2 inputs type="file" con los names "name_1_del_input_file" y "name_2_del_input_file" respectivamente...
+En este segundo caso mando mando un .png en el primer input y un .txt en el segundo. Debugueo $_FILE en el controlador que recibe la petición. El debug vvv
+
+Array
+(
+    [name_1_del_input_file] => Array
+        (
+            [name] => speaker_13.png
+            [full_path] => speaker_13.png
+            [type] => image/png
+            [tmp_name] => C:\xampp\tmp\php1E83.tmp
+            [error] => 0
+            [size] => 359928
+        )
+    [name_2_del_input_file] => Array
+        (
+            [name] => entrevista.txt
+            [full_path] => entrevista.txt
+            [type] => text/plain
+            [tmp_name] => C:\xampp\tmp\php1E84.tmp
+            [error] => 0
+            [size] => 5710
+        )
+)
+
+----- 
+
+el formato .png permite imagenes con fondo transparente
+
+* debugueo de $_FILES cuando le mandamos una imagen desde el <intput name="imagen"> vvv 
+array(1) {
+  ["imagen"]=>
+  array(6) {
+    ["name"]=>
+    string(14) "speaker_16.png"
+    ["full_path"]=>
+    string(14) "speaker_16.png"
+    ["type"]=>
+    string(9) "image/png"
+    ["tmp_name"]=>
+    string(24) "C:\xampp\tmp\phpE3C0.tmp"
+    ["error"]=>
+    int(0)
+    ["size"]=>
+    int(383347)
+  }
+}

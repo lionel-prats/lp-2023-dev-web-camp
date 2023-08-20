@@ -4,6 +4,7 @@ namespace Controllers;
 
 use MVC\Router;
 use Model\Ponente;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class PonentesController {
     public static function index(Router $router) {
@@ -17,6 +18,28 @@ class PonentesController {
         $ponente = new Ponente;
 
         if($_SERVER["REQUEST_METHOD"] === "POST") {
+
+            // compruebo si se cargó una imagen en el <input name="imagen"> del form de creación de un ponente, y si sí, toda la lógica para generar versiones .png y .webp y guardar dicha imagen fisicamente en el servidor (VIDEO 708)
+            if(!empty($_FILES["imagen"]["tmp_name"])) {
+                
+                $carpeta_imagenes = "../public/img/speakers";
+                
+                // Si no existe, creo la carpeta que contendrá las imagenes de los ponentes
+                if(!is_dir($carpeta_imagenes)) {
+                    mkdir($carpeta_imagenes, 0755, true); // (VIDEO 708)
+                } 
+
+                // generamos una imagen.png de 800x800 y un 80% de calidad que se mantienen en memoria (debemos guardarlas fisicamente en el servidor) (VIDEO 708) 
+                $imagen_png = Image::make($_FILES["imagen"]["tmp_name"])->fit(800, 800)->encode("png", 80);
+                $imagen_webp = Image::make($_FILES["imagen"]["tmp_name"])->fit(800, 800)->encode("webp", 80);
+
+                // nombre random para la imagen -> f63f4c13c10940b6b0f91e0174e0f0d0
+                $nombre_imagen = md5( uniqid( rand(), true ) );
+                
+                // generamos la clave "imagen" en el $_POST para agregar el nombre generado para la imagen que se va a subir al servidor, asociada al ponente que vamos a crear en la DB, ya que $_POST se va a sincronizar con la instancia de Ponente para hacer el INSERT
+                $_POST["imagen"] = $nombre_imagen;
+            } 
+
             $ponente->sincronizar($_POST);
             $alertas = $ponente->validar();
             
