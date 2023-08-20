@@ -40,8 +40,33 @@ class PonentesController {
                 $_POST["imagen"] = $nombre_imagen;
             } 
 
+            // REDES DE EJEMPLO -> https://github.com/lio85
+            // REDES DE EJEMPLO -> https://twitter.com/codigoconjuan
+
+            // convierto el array con las redes de un ponente en un string (VIDEO 709)
+            // la constante JSON_UNESCAPED_SLASHES como 2do. parametro del json_encode es para eliminar las barras invertidas (VIDEO 709)
+            // hay que hacer esto para poder guardar el string de redes de un ponente en el campo "redes" de devwebcamp.ponentes
+            $_POST["redes"] = json_encode($_POST["redes"], JSON_UNESCAPED_SLASHES);
+
             $ponente->sincronizar($_POST);
             $alertas = $ponente->validar();
+
+            // si $alertas está vacío significa que el formulario de creación de un ponente se completó correctamente (incluída la carga de la imagen), por lo que avanzamos a guardar la imagen en el servidor y a crear el registro en la DB (VIDEO 709)
+            if(empty($alertas)) {
+                
+                // Guardar la imagen en el servidor 
+                //->save(../public/img/speakers/f63f4c13c10940b6b0f91e0174e0f0d0.png)
+                //->save(../public/img/speakers/f63f4c13c10940b6b0f91e0174e0f0d0.webp)
+                $imagen_png->save($carpeta_imagenes . "/" . $nombre_imagen . ".png");
+                $imagen_webp->save($carpeta_imagenes . "/" . $nombre_imagen . ".webp");
+
+                // Guardar el registro del ponente en la BD
+                $resultado = $ponente->guardar();
+                
+                if($resultado) {
+                    header("Location: /admin/ponentes");
+                }
+            }
             
         }
 
