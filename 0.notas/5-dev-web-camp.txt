@@ -243,3 +243,7 @@ VIDEO 706
 CSS vvv 
 
 De una manera muy simple deja fijo el Header superior (similar a position: sricky)
+
+-----
+
+VIDEO ?
