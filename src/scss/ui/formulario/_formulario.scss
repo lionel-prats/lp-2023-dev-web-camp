@@ -67,9 +67,10 @@
         }
     }
 
-
+    &__listado {
+        @include m.tags;      
+    }
   
-
     &__submit {
         @include m.boton(v.$azul, v.$blanco);
         width: auto;

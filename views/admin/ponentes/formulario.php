@@ -64,7 +64,9 @@
             id="tags_input"
             placeholder="Ej. Node.js, PHP, CSS, Laravel, UX / UI"
         >
+        
         <div id="tags" class="formulario__listado"></div>
+
         <input type="hidden" name="tags" value="<?php echo $ponente->tags ?? ""; ?>">
     </div>
 </fieldset>

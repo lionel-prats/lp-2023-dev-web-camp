@@ -148,3 +148,34 @@
     // https://getcssscan.com/css-box-shadow-examples
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
+
+@mixin reset-lista {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+@mixin tags {
+    @include reset-lista;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+
+    // todos los <li> hijos en primer nivel vvv (VIDEO 706)
+    //<element>                         || padre
+    //  <li>                            || hijo primer nivel
+    //      <li>HIJO SEGUNDO NIVEL</li> || hijo segundo nivel          
+    //  </li>
+    //  <li></li>                       || hijo primer nivel
+    //</element>
+    // el profesor explica que asi capturamos los <li> hijos de primer nivel, pero hice pruebas y comprobe que los de 2do tambien, asi que estoy capturando todos los <li> hijos
+    > li {
+        padding: 1rem;
+        border-radius: .5rem;
+        font-size: 1.4rem;
+        font-weight: v.$bold;
+        background-color: v.$azul;
+        color: v.$blanco;
+    }
+}
