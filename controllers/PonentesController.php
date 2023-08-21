@@ -109,6 +109,55 @@ class PonentesController {
 
         $ponente->imagen_actual = $ponente->imagen;
 
+        if($_SERVER["REQUEST_METHOD"] === "POST") {
+
+            if(!empty($_FILES["imagen"]["tmp_name"])) { // el admin cargó imagen nueva para el ponente
+               
+                $carpeta_imagenes = "../public/img/speakers";
+                
+                if(!is_dir($carpeta_imagenes)) {
+                    mkdir($carpeta_imagenes, 0755, true); 
+                } 
+
+                $imagen_png = Image::make($_FILES["imagen"]["tmp_name"])->fit(800, 800)->encode("png", 80);
+                $imagen_webp = Image::make($_FILES["imagen"]["tmp_name"])->fit(800, 800)->encode("webp", 80);
+
+                // nombre random para la imagen por subir al server
+                $nombre_imagen = md5( uniqid( rand(), true ) );
+                
+                $_POST["imagen"] = $nombre_imagen; // cargo al $_POST que voy a sincronizar con $ponente el nombre de la imagen nueva para el UPDATE en la DB (VIDEO 716)
+
+            } else { // el admin NO cargó imagen nueva para el ponente
+
+                $_POST["imagen"] = $ponente->imagen_actual; // cargo al $_POST que voy a sincronizar con $ponente el nombre de la imagen actual para el UPDATE en la DB (VIDEO 716)
+
+            }
+            
+            $_POST["redes"] = json_encode($_POST["redes"], JSON_UNESCAPED_SLASHES);
+
+            $ponente->sincronizar($_POST);
+            
+            $alertas = $ponente->validar();
+
+            if(empty($alertas)) {
+
+                if(isset($nombre_imagen)) { // El admin cargó imagen nueva para el ponente
+                    
+                    $imagen_png->save($carpeta_imagenes . "/" . $nombre_imagen . ".png");
+                    $imagen_webp->save($carpeta_imagenes . "/" . $nombre_imagen . ".webp");
+
+                }
+
+                $resultado = $ponente->guardar();
+                
+                if($resultado) {
+                    header("Location: /admin/ponentes");
+                }
+
+            }
+
+        }
+
         $router->render("admin/ponentes/editar", [
             "titulo" => "Editar Ponente",
             "alertas" => $alertas,
