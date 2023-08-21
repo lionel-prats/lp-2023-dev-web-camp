@@ -10,6 +10,14 @@ class PonentesController {
     // index de ponentes
     public static function index(Router $router) {
 
+        if(!is_auth()) { // Si el usuario no está logueado, lo redirijo al form de login
+            header("Location: /login");
+        } elseif(!is_admin()) { // Si el usuario está logueado pero no es admin, lo redirijo al "home de usuarios no admin"
+            header("Location: /finalizar-registro");
+        }
+
+        // debuguear($_SESSION);
+
         $ponentes = Ponente::all();
         //debuguear($ponentes);
 
@@ -20,6 +28,12 @@ class PonentesController {
     }
     // Crear ponente -> form y prosesamiento
     public static function crear(Router $router) {
+
+        if(!is_auth()) { // Si el usuario no está logueado, lo redirijo al form de login
+            header("Location: /login");
+        } elseif(!is_admin()) { // Si el usuario está logueado pero no es admin, lo redirijo al "home de usuarios no admin"
+            header("Location: /finalizar-registro");
+        }
 
         $alertas = [];
         $ponente = new Ponente;
@@ -86,6 +100,12 @@ class PonentesController {
     }
     // Editar ponente -> form y prosesamiento
     public static function editar(Router $router) {
+
+        if(!is_auth()) { // Si el usuario no está logueado, lo redirijo al form de login
+            header("Location: /login");
+        } elseif(!is_admin()) { // Si el usuario está logueado pero no es admin, lo redirijo al "home de usuarios no admin"
+            header("Location: /finalizar-registro");
+        }
 
         $alertas = [];
 
@@ -169,6 +189,13 @@ class PonentesController {
     }
     // Eliminar un ponente de la BD (borrado físico)
     public static function eliminar() {
+
+        if(!is_auth()) { // Si el usuario no está logueado, lo redirijo al form de login
+            header("Location: /login");
+        } elseif(!is_admin()) { // Si el usuario está logueado pero no es admin, lo redirijo al "home de usuarios no admin"
+            header("Location: /finalizar-registro");
+        }
+        
         if($_SERVER["REQUEST_METHOD"] === "POST") {
             
             $id = $_POST["id"];
