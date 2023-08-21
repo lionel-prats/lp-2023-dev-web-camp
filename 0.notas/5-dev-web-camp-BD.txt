@@ -1,4 +1,11 @@
-TABLA usuarios
+Reiniciar los IDs de una tabla
+
+USE devwebcamp;
+ALTER TABLE ponentes AUTO_INCREMENT = 1;
+
+--------------------
+
+CREATE TABLA usuarios
 
 USE devwebcamp;
 CREATE TABLE `usuarios` (
@@ -15,7 +22,7 @@ CREATE TABLE `usuarios` (
 
 --------------------
 
-TABLA ponentes
+CREATE TABLA ponentes
 
 USE devwebcamp;
 CREATE TABLE `ponentes` (

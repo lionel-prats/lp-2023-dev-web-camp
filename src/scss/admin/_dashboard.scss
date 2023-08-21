@@ -125,7 +125,7 @@
     }
 
     &__contenedor {
-        @include m.shadow;
+        @include m.shadow; // es un box-shadow para el elemento
         padding: 2rem;
         border-radius: 1rem;
         background-color: v.$blanco;
