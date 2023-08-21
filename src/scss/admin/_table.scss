@@ -1,0 +1,60 @@
+@use "base/variables" as v;
+@use "base/mixins" as m; 
+
+.table {
+    width: 100%;
+    border-collapse: collapse; // para eliminar la separación entre columnas (VIDEO 711)
+    &__thead {
+        background-color: v.$gris-oscuro;
+        color: v.$blanco;   
+    }
+    &__th {
+        padding: 1rem;
+        text-align: left;
+    }
+    &__tr {
+
+        // selecciono los elementos hijo PARES de un contenedor padre
+        // obtenemos el mismo resultado capturando los elementos hijos tanto con :nth-child como con :nth-of-type
+        // even = pares, odd = impares
+        &:nth-child(even) {
+            background-color: darken(v.$gris-claro, 15); 
+        }
+
+        // selecciono los elementos hijo IMPARES de un contenedor padre
+        // obtenemos el mismo resultado capturando los elementos hijos tanto con :nth-of-type como con :nth-child
+        // odd = impares, even = pares
+        // &:nth-of-type(odd) {
+        //     background-color: salmon; 
+        // }
+    }
+    &__td {
+        //border: 1px solid #000000;
+        padding: 1.5rem 1rem;
+        &--acciones {
+            @extend .table__td;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 2rem;
+        }
+    }
+
+    &__accion {
+        all: unset; // resetea todas las propiedades por defecto de un elemento html (VIDEO 711)
+        font-size: 1.4rem;
+        font-weight: v.$bold;
+        text-transform: uppercase;
+    }
+    &__accion--editar {
+        color: v.$azul;
+        
+    }
+    &__accion--eliminar {
+        color: v.$rojo;
+    }
+    &__ {
+
+    }
+
+}
