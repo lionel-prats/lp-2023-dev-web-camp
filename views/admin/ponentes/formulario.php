@@ -53,6 +53,26 @@
             name="imagen"
         >
     </div>
+
+    <!-- imagen previa del ponente en el formulario de edición de ponente -->
+    <?php if(isset($ponente->imagen_actual)): ?>
+        <p class="formulario__texto">ImagenActual:</p>
+        <div class="formulario__imagen">
+
+            <!-- si el navegador sopórta .webp (hoy practicamente todos) se va a cargar la version .webp ganando en performance ya que este formato es mucho mas liviando que el formato .png (VIDEO 713) -->
+            <picture>
+                <source srcset="<?php echo $_ENV['HOST'] . '/img/speakers/' . $ponente->imagen_actual; ?>.webp" type="image/webp">
+                <source srcset="<?php echo $_ENV['HOST'] . '/img/speakers/' . $ponente->imagen_actual; ?>.png" type="image/png">
+                <img 
+                    src="<?php echo $_ENV['HOST'] . '/img/speakers/' . $ponente->imagen_actual; ?>.png" 
+                    alt="Imagen Ponente"
+                >
+            </picture>
+
+
+        </div>
+    <?php endif; ?>
+
 </fieldset>
 <fieldset class="formulario__fieldset">
     <legend class="formulario__legend">Información Extra</legend>
