@@ -74,6 +74,7 @@
     <?php endif; ?>
 
 </fieldset>
+
 <fieldset class="formulario__fieldset">
     <legend class="formulario__legend">Información Extra</legend>
     <div class="formulario__campo">
@@ -91,10 +92,12 @@
          -->
         <div id="tags" class="formulario__listado"></div>
 
+        <!-- este input es capturafo en tags.js y desde ahí se utiliza para completar el <div id="tags"> y para enviar los tags de un ponente al servidor -->
         <input type="hidden" name="tags" value="<?php echo $ponente->tags ?? ""; ?>">
 
     </div>
 </fieldset>
+
 <fieldset class="formulario__fieldset">
     <legend class="formulario__legend">Redes Sociales</legend>
     <div class="formulario__campo">
@@ -107,7 +110,7 @@
                 class="formulario__input--sociales"
                 name="redes[facebook]"
                 placeholder="Facebook"
-                value="<?php echo $ponente->facebook ?? "" ?>"
+                value="<?php echo $redes->facebook ?? "" ?>"
             >
         </div>
     </div>
@@ -121,7 +124,7 @@
                 class="formulario__input--sociales"
                 name="redes[twitter]"
                 placeholder="Twitter"
-                value="<?php echo $ponente->twitter ?? "" ?>"
+                value="<?php echo $redes->twitter ?? "" ?>"
             >
         </div>
     </div>
@@ -135,7 +138,7 @@
                 class="formulario__input--sociales"
                 name="redes[youtube]"
                 placeholder="YouTube"
-                value="<?php echo $ponente->youtube ?? "" ?>"
+                value="<?php echo $redes->youtube ?? "" ?>"
             >
         </div>
     </div>
@@ -149,7 +152,7 @@
                 class="formulario__input--sociales"
                 name="redes[instagram]"
                 placeholder="Instagram"
-                value="<?php echo $ponente->instagram ?? "" ?>"
+                value="<?php echo $redes->instagram ?? "" ?>"
             >
         </div>
     </div>
@@ -163,7 +166,7 @@
                 class="formulario__input--sociales"
                 name="redes[tiktok]"
                 placeholder="TikTok"
-                value="<?php echo $ponente->tiktok ?? "" ?>"
+                value="<?php echo $redes->tiktok ?? "" ?>"
             >
         </div>
     </div>
@@ -177,7 +180,7 @@
                 class="formulario__input--sociales"
                 name="redes[github]"
                 placeholder="GitHub"
-                value="<?php echo $ponente->github ?? "" ?>"
+                value="<?php echo $redes->github ?? "" ?>"
             >
         </div>
     </div>

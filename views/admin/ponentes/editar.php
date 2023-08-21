@@ -22,7 +22,9 @@
         class="formulario"
         enctype="multipart/form-data"     
     >
+
         <?php include_once __DIR__ . "./formulario.php"; ?>
+        
         <input 
             type="submit" 
             value="Actualizar Ponente"

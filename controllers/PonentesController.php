@@ -68,6 +68,8 @@ class PonentesController {
                 $imagen_png->save($carpeta_imagenes . "/" . $nombre_imagen . ".png");
                 $imagen_webp->save($carpeta_imagenes . "/" . $nombre_imagen . ".webp");
 
+                debuguear($ponente);
+
                 // Guardar el registro del ponente en la BD
                 $resultado = $ponente->guardar();
                 
@@ -75,13 +77,13 @@ class PonentesController {
                     header("Location: /admin/ponentes");
                 }
             }
-            
         }
 
         $router->render("admin/ponentes/crear", [
             "titulo" => "Registrar Ponente",
             "alertas" => $alertas,
-            "ponente" => $ponente
+            "ponente" => $ponente,
+            "redes" => json_decode($ponente->redes) // (VIDEO 715)
         ]);
     }
     // Editar ponente -> form y prosesamiento
@@ -106,12 +108,12 @@ class PonentesController {
         }
 
         $ponente->imagen_actual = $ponente->imagen;
-        //debuguear($ponente);
 
         $router->render("admin/ponentes/editar", [
             "titulo" => "Editar Ponente",
             "alertas" => $alertas,
-            "ponente" => $ponente
+            "ponente" => $ponente,
+            "redes" => json_decode($ponente->redes) // (VIDEO 715)
         ]);
     }
 }
