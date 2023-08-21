@@ -68,8 +68,6 @@ class PonentesController {
                 $imagen_png->save($carpeta_imagenes . "/" . $nombre_imagen . ".png");
                 $imagen_webp->save($carpeta_imagenes . "/" . $nombre_imagen . ".webp");
 
-                debuguear($ponente);
-
                 // Guardar el registro del ponente en la BD
                 $resultado = $ponente->guardar();
                 
@@ -143,6 +141,10 @@ class PonentesController {
 
                 if(isset($nombre_imagen)) { // El admin cargó imagen nueva para el ponente
                     
+                    // borro las imagenes viejas del ponente ya que el admin las reemplazó
+                    unlink($carpeta_imagenes . "/" . $ponente->imagen_actual . ".png"); 
+                    unlink($carpeta_imagenes . "/" . $ponente->imagen_actual . ".webp"); 
+
                     $imagen_png->save($carpeta_imagenes . "/" . $nombre_imagen . ".png");
                     $imagen_webp->save($carpeta_imagenes . "/" . $nombre_imagen . ".webp");
 
@@ -164,5 +166,34 @@ class PonentesController {
             "ponente" => $ponente,
             "redes" => json_decode($ponente->redes) // (VIDEO 715)
         ]);
+    }
+    // Eliminar un ponente de la BD (borrado físico)
+    public static function eliminar() {
+        if($_SERVER["REQUEST_METHOD"] === "POST") {
+            
+            $id = $_POST["id"];
+            
+            $ponente = Ponente::find($id);
+            
+            if(!$ponente) {
+                header("Location: /admin/ponentes");
+            }
+            
+            $resultado = $ponente->eliminar();
+
+            
+            if($resultado){
+                
+                $carpeta_imagenes = "../public/img/speakers";
+
+                // borro las imagenes del ponente borrado
+                unlink($carpeta_imagenes . "/" . $ponente->imagen . ".png"); 
+                unlink($carpeta_imagenes . "/" . $ponente->imagen . ".webp"); 
+                
+                header("Location: /admin/ponentes");
+
+            }
+
+        }
     }
 }
