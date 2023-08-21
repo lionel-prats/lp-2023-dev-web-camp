@@ -4,19 +4,27 @@ namespace Controllers;
 
 use MVC\Router;
 use Model\Ponente;
+use Classes\Paginacion;
 use Intervention\Image\ImageManagerStatic as Image;
 
 class PonentesController {
     // index de ponentes
     public static function index(Router $router) {
 
+        // protejo la vista
         if(!is_auth()) { // Si el usuario no está logueado, lo redirijo al form de login
             header("Location: /login");
         } elseif(!is_admin()) { // Si el usuario está logueado pero no es admin, lo redirijo al "home de usuarios no admin"
             header("Location: /finalizar-registro");
         }
-
         // debuguear($_SESSION);
+
+        $pagina_actual = "1";
+        $registros_por_pagina = "10";
+        $total_registros = "10";
+        $paginacion = new Paginacion($pagina_actual, $registros_por_pagina, $total_registros);
+        debuguear($paginacion);
+
 
         $ponentes = Ponente::all();
         //debuguear($ponentes);
@@ -29,6 +37,7 @@ class PonentesController {
     // Crear ponente -> form y prosesamiento
     public static function crear(Router $router) {
 
+        // protejo la vista
         if(!is_auth()) { // Si el usuario no está logueado, lo redirijo al form de login
             header("Location: /login");
         } elseif(!is_admin()) { // Si el usuario está logueado pero no es admin, lo redirijo al "home de usuarios no admin"
@@ -101,6 +110,7 @@ class PonentesController {
     // Editar ponente -> form y prosesamiento
     public static function editar(Router $router) {
 
+        // protejo la vista
         if(!is_auth()) { // Si el usuario no está logueado, lo redirijo al form de login
             header("Location: /login");
         } elseif(!is_admin()) { // Si el usuario está logueado pero no es admin, lo redirijo al "home de usuarios no admin"
@@ -190,6 +200,7 @@ class PonentesController {
     // Eliminar un ponente de la BD (borrado físico)
     public static function eliminar() {
 
+        // protejo la vista
         if(!is_auth()) { // Si el usuario no está logueado, lo redirijo al form de login
             header("Location: /login");
         } elseif(!is_admin()) { // Si el usuario está logueado pero no es admin, lo redirijo al "home de usuarios no admin"
