@@ -53,6 +53,7 @@ class PonentesController {
             // convierto el array con las redes de un ponente en un string (VIDEO 709)
             // la constante JSON_UNESCAPED_SLASHES como 2do. parametro del json_encode es para eliminar las barras invertidas (VIDEO 709)
             // hay que hacer esto para poder guardar el string de redes de un ponente en el campo "redes" de devwebcamp.ponentes
+            // A su vez, si por ejemplo, el usuario que está creando
             $_POST["redes"] = json_encode($_POST["redes"], JSON_UNESCAPED_SLASHES);
 
             $ponente->sincronizar($_POST);

@@ -85,9 +85,14 @@
             placeholder="Ej. Node.js, PHP, CSS, Laravel, UX / UI"
         >
         
+        <!-- 
+        *** En el form de creación de ponente este <div> mostrará por pantalla en tiempo real <li> con las experiencia que va a ir ingresando el administrador en el <input id="tags_input"> 
+        *** En el form de edición, apenas se cargue el form, ya aparecerá cargado con los <li> de cada experiencia asociada al ponente, data que viene de la BD (VIDEO 714).
+         -->
         <div id="tags" class="formulario__listado"></div>
 
         <input type="hidden" name="tags" value="<?php echo $ponente->tags ?? ""; ?>">
+
     </div>
 </fieldset>
 <fieldset class="formulario__fieldset">
