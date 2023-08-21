@@ -37,6 +37,8 @@ class ActiveRecord {
         // Consultar la base de datos
         $resultado = self::$db->query($query);
 
+        //debuguear($resultado);
+
         // Iterar los resultados
         $array = [];
         while($registro = $resultado->fetch_assoc()) {
@@ -129,8 +131,23 @@ class ActiveRecord {
     public static function where($columna, $valor) {
         $query = "SELECT * FROM " . static::$tabla . " WHERE ${columna} = '${valor}'";
         $resultado = self::consultarSQL($query);
-        return array_shift( $resultado ) ;
+        return array_shift( $resultado );
     }
+    
+    // Consultar el total de registros de una tabla
+    public static function total() : int {
+        
+        $query = "SELECT COUNT(*) FROM " . static::$tabla;
+        
+        $resultado = self::$db->query($query);
+
+        // $total = $resultado->fetch_assoc();
+        $total = $resultado->fetch_array();
+        
+        // array_shift($array) retorna el primer elemento de un array (VIDEO 722)
+        return (int) array_shift($total);
+    }
+
 
     // crea un nuevo registro
     public function crear() {

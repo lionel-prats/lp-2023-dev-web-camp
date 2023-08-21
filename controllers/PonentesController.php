@@ -20,17 +20,21 @@ class PonentesController {
         // debuguear($_SESSION); --------------------------------------------------------------------------
 
         $pagina_actual = $_GET["page"];
-        $pagina_actual = filter_var($pagina_actual, FILTER_VALIDATE_INT);
+
+        // con filter_var() valido que el queryStrin date sea un (int) (VIDEO 721)
+        $pagina_actual = filter_var($pagina_actual, FILTER_VALIDATE_INT); 
         
         if(!$pagina_actual || $pagina_actual < 1) {
             header("Location: /admin/ponentes?page=1");
         }
-        debuguear($pagina_actual);
-
-
+        //debuguear($pagina_actual);
+        
+        $total = Ponente::total();
+        // debuguear($total);
+    
         $registros_por_pagina = "10";
-        $total_registros = "10";
-        $paginacion = new Paginacion($pagina_actual, $registros_por_pagina, $total_registros);
+
+        $paginacion = new Paginacion($pagina_actual, $registros_por_pagina, $total);
         //debuguear($paginacion);
 
 
