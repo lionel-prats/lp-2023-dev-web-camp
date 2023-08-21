@@ -11,19 +11,27 @@ class PonentesController {
     // index de ponentes
     public static function index(Router $router) {
 
-        // protejo la vista
+        // protejo la vista (cualquier usuario que quiera ingresar a esta vista y no sea admin, será redirigido)
         if(!is_auth()) { // Si el usuario no está logueado, lo redirijo al form de login
             header("Location: /login");
         } elseif(!is_admin()) { // Si el usuario está logueado pero no es admin, lo redirijo al "home de usuarios no admin"
             header("Location: /finalizar-registro");
         }
-        // debuguear($_SESSION);
+        // debuguear($_SESSION); --------------------------------------------------------------------------
 
-        $pagina_actual = "1";
+        $pagina_actual = $_GET["page"];
+        $pagina_actual = filter_var($pagina_actual, FILTER_VALIDATE_INT);
+        
+        if(!$pagina_actual || $pagina_actual < 1) {
+            header("Location: /admin/ponentes?page=1");
+        }
+        debuguear($pagina_actual);
+
+
         $registros_por_pagina = "10";
         $total_registros = "10";
         $paginacion = new Paginacion($pagina_actual, $registros_por_pagina, $total_registros);
-        debuguear($paginacion);
+        //debuguear($paginacion);
 
 
         $ponentes = Ponente::all();
@@ -37,7 +45,7 @@ class PonentesController {
     // Crear ponente -> form y prosesamiento
     public static function crear(Router $router) {
 
-        // protejo la vista
+        // protejo la vista (cualquier usuario que quiera ingresar a esta vista y no sea admin, será redirigido)
         if(!is_auth()) { // Si el usuario no está logueado, lo redirijo al form de login
             header("Location: /login");
         } elseif(!is_admin()) { // Si el usuario está logueado pero no es admin, lo redirijo al "home de usuarios no admin"
@@ -110,7 +118,7 @@ class PonentesController {
     // Editar ponente -> form y prosesamiento
     public static function editar(Router $router) {
 
-        // protejo la vista
+        // protejo la vista (cualquier usuario que quiera ingresar a esta vista y no sea admin, será redirigido)
         if(!is_auth()) { // Si el usuario no está logueado, lo redirijo al form de login
             header("Location: /login");
         } elseif(!is_admin()) { // Si el usuario está logueado pero no es admin, lo redirijo al "home de usuarios no admin"
@@ -200,7 +208,7 @@ class PonentesController {
     // Eliminar un ponente de la BD (borrado físico)
     public static function eliminar() {
 
-        // protejo la vista
+        // protejo la vista (cualquier usuario que quiera ingresar a esta vista y no sea admin, será redirigido)
         if(!is_auth()) { // Si el usuario no está logueado, lo redirijo al form de login
             header("Location: /login");
         } elseif(!is_admin()) { // Si el usuario está logueado pero no es admin, lo redirijo al "home de usuarios no admin"
