@@ -24,7 +24,7 @@
                 <?php foreach($ponentes as $ponente): ?>
                     <tr class="table__tr">
                         <td class="table__td">
-                            <?php echo $ponente->nombre . $ponente->apellido; ?>
+                            <?php echo $ponente->nombre . " " . $ponente->apellido; ?>
                         </td>
                         <td class="table__td">
                             <?php echo $ponente->ciudad . ", " . $ponente->pais; ?>

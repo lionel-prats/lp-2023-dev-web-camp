@@ -7,6 +7,7 @@ use Model\Ponente;
 use Intervention\Image\ImageManagerStatic as Image;
 
 class PonentesController {
+    // index de ponentes
     public static function index(Router $router) {
 
         $ponentes = Ponente::all();
@@ -17,6 +18,7 @@ class PonentesController {
             "ponentes" => $ponentes
         ]);
     }
+    // Crear ponente -> form y prosesamiento
     public static function crear(Router $router) {
 
         $alertas = [];
@@ -77,6 +79,34 @@ class PonentesController {
 
         $router->render("admin/ponentes/crear", [
             "titulo" => "Registrar Ponente",
+            "alertas" => $alertas,
+            "ponente" => $ponente
+        ]);
+    }
+    // Editar ponente -> form y prosesamiento
+    public static function editar(Router $router) {
+
+        $alertas = [];
+
+        $id = $_GET["id"];
+
+        // capturo el id de ponente que viene en la URL validando que sea un id (VIDEO 712)
+        // si el valor a revisar es int, retorna ese int, caso contrario retorna FALSE
+        $id = filter_var($_GET["id"], FILTER_VALIDATE_INT) ;
+
+        if(!$id) {
+            header("Location: /admin/ponentes");
+        }
+
+        $ponente = Ponente::find($id);
+
+        if(!$ponente) {
+            header("Location: /admin/ponentes");
+        }
+
+
+        $router->render("admin/ponentes/editar", [
+            "titulo" => "Editar Ponente",
             "alertas" => $alertas,
             "ponente" => $ponente
         ]);
