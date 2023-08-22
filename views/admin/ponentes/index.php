@@ -9,7 +9,6 @@
         Añadir ponente
     </a>
 </div>
-
 <div class="dashboard__contenedor">
     <?php if (!empty($ponentes)): ?>
         <table class="table">
@@ -58,3 +57,5 @@
         <p class="text-center">No Hay Ponentes Aún</p>
     <?php endif; ?>
 </div>
+
+<?php echo $paginacion; ?>

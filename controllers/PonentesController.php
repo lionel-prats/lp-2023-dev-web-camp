@@ -30,25 +30,19 @@ class PonentesController {
         }
         
         // cantidad de registros por página del paginado
-        $registros_por_pagina = "10";
+        $registros_por_pagina = "6";
 
         // (int) total de registros de la tabla ponentes
         $total = Ponente::total();
 
         $paginacion = new Paginacion($pagina_actual, $registros_por_pagina, $total);
 
-        //debuguear($paginacion->offset());
-        //debuguear($paginacion->total_paginas());
-        // debuguear($paginacion->pagina_anterior());
-        debuguear($paginacion->pagina_siguiente());
-
-
         $ponentes = Ponente::all();
-        //debuguear($ponentes);
 
         $router->render("admin/ponentes/index", [
             "titulo" => "Ponentes / Conferencistas",
-            "ponentes" => $ponentes
+            "ponentes" => $ponentes,
+            "paginacion" => $paginacion->paginacion()
         ]);
     }
     // Crear ponente -> form y prosesamiento
