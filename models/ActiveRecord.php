@@ -134,7 +134,7 @@ class ActiveRecord {
         return array_shift( $resultado );
     }
     
-    // Consultar el total de registros de una tabla
+    // Retorna el total de registros de una tabla
     public static function total() : int {
         
         $query = "SELECT COUNT(*) FROM " . static::$tabla;

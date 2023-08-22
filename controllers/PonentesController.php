@@ -19,6 +19,7 @@ class PonentesController {
         }
         // debuguear($_SESSION); --------------------------------------------------------------------------
 
+        // nro. de página del paginado de la vista (por default = 1)
         $pagina_actual = $_GET["page"];
 
         // con filter_var() valido que el queryStrin date sea un (int) (VIDEO 721)
@@ -27,15 +28,19 @@ class PonentesController {
         if(!$pagina_actual || $pagina_actual < 1) {
             header("Location: /admin/ponentes?page=1");
         }
-        //debuguear($pagina_actual);
         
-        $total = Ponente::total();
-        // debuguear($total);
-    
+        // cantidad de registros por página del paginado
         $registros_por_pagina = "10";
 
+        // (int) total de registros de la tabla ponentes
+        $total = Ponente::total();
+
         $paginacion = new Paginacion($pagina_actual, $registros_por_pagina, $total);
-        //debuguear($paginacion);
+
+        //debuguear($paginacion->offset());
+        //debuguear($paginacion->total_paginas());
+        // debuguear($paginacion->pagina_anterior());
+        debuguear($paginacion->pagina_siguiente());
 
 
         $ponentes = Ponente::all();
