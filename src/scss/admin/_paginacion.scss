@@ -5,14 +5,24 @@
     border: 1px solid #000000;
     display: flex;
     justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
     gap: 1rem;
     margin-top: 5rem;
     margin-bottom: 3rem;
-
+    
     @include m.tablet {
-        justify-content: flex-end;
+        gap:3rem;
     };
+
+    &__contenedor-numeros {
+        display: none;
+        // flex: 1;
+        @include m.tablet {
+            display: flex;
+            justify-content: space-between;
+        };
+    }
 
     &__enlace {
         
@@ -30,6 +40,20 @@
                 background-color: v.$azul;
                 color: v.$blanco;
             }
+        }
+        &--invisible {
+            visibility: hidden;
+        }
+        &--numero {
+            font-weight: v.$bold;
+            padding: .5rem .8rem;
+        }
+        &--actual {
+            padding: .5rem .8rem;
+            border-radius: .5rem;
+            font-weight: v.$bold;
+            background-color: v.$azul;
+            color: v.$blanco;
         }
     }
 }

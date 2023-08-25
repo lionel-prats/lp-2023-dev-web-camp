@@ -30,7 +30,7 @@ class PonentesController {
         }
         
         // cantidad de registros por página del paginado
-        $registros_por_pagina = "6";
+        $registros_por_pagina = "2";
 
         // (int) total de registros de la tabla ponentes
         $total = Ponente::total();

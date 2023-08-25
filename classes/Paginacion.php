@@ -45,33 +45,49 @@ class Paginacion {
     }
 
     public function enlace_anterior() {
-        $html = "";
-        if($this->pagina_anterior()) { // si el return es FALSE no se imprimirá el <a>
-            $html .= "
-                <a 
-                    class=\"paginacion__enlace paginacion__enlace--texto\" 
-                    href=\"?page={$this->pagina_anterior()}\"
-                >
-                    &laquo Anterior
-                </a>
-            ";
-            return $html;
+        $html = "<a href=\"?page={$this->pagina_anterior()}\" class=\"paginacion__enlace paginacion__enlace--texto"; 
+        if(!$this->pagina_anterior()) {
+            $html .= " paginacion__enlace--invisible";
         }
+        $html .= "\">&laquo Anterior</a>";
+        return $html;
     }
 
     public function enlace_siguiente() {
-        $html = "";
-        if($this->pagina_siguiente()) { // si el return es FALSE no se imprimirá el <a>
-            $html .= "
-                <a 
-                    class=\"paginacion__enlace paginacion__enlace--texto\" 
-                    href=\"?page={$this->pagina_siguiente()}\"
-                >
-                    Siguiente &raquo
-                </a>
-            ";
-            return $html;
+        $html = "<a href=\"?page={$this->pagina_siguiente()}\" class=\"paginacion__enlace paginacion__enlace--texto"; 
+        if(!$this->pagina_siguiente()) {
+            $html .= " paginacion__enlace--invisible";
         }
+        $html .= "\">Siguiente &raquo</a>";
+        return $html;
+    }
+
+    public function numeros_paginas(){
+        $html = "<div class=\"paginacion__contenedor-numeros\">";
+        for($i = 1; $i <= $this->total_paginas(); $i++) {
+            if($i === $this->pagina_actual){
+                $html .= "
+                    <span 
+                        class=\"paginacion__enlace paginacion__enlace--actual\" 
+                        href=\"?page={$i}\"
+                    >
+                        {$i}
+                    </span>
+                ";
+            } else {
+                $html .= "
+                    <a 
+                        class=\"paginacion__enlace paginacion__enlace--numero\" 
+                        href=\"?page={$i}\"
+                    >
+                        {$i}
+                    </a>
+                ";
+
+            }
+        }
+        $html .= "</div>";
+        return $html;
     }
 
     public function paginacion() {
@@ -79,6 +95,7 @@ class Paginacion {
         if($this->total_registros > 1) {
             $html .= "<div class=\"paginacion\">";
             $html .= $this->enlace_anterior();
+            $html .= $this->numeros_paginas();
             $html .= $this->enlace_siguiente();
             $html .= "</div>";
         }
