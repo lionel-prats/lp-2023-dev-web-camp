@@ -25,11 +25,8 @@
     }
 
     &__enlace {
-        
-
         font-size: 1.6rem;
         color: v.$azul;
-    
 
         &--texto {
             padding: 1rem;
@@ -41,13 +38,16 @@
                 color: v.$blanco;
             }
         }
+
         &--invisible {
             visibility: hidden;
         }
+        
         &--numero {
             font-weight: v.$bold;
             padding: .5rem .8rem;
         }
+        
         &--actual {
             padding: .5rem .8rem;
             border-radius: .5rem;
