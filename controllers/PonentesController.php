@@ -22,7 +22,7 @@ class PonentesController {
         // nro. de página del paginado de la vista (por default = 1)
         $pagina_actual = $_GET["page"];
 
-        // con filter_var() valido que el queryStrin date sea un (int) (VIDEO 721)
+        // con filter_var() valido que el queryString date sea un (int) (VIDEO 721)
         $pagina_actual = filter_var($pagina_actual, FILTER_VALIDATE_INT); 
         
         if(!$pagina_actual || $pagina_actual < 1) {
@@ -30,7 +30,7 @@ class PonentesController {
         }
         
         // cantidad de registros por página del paginado
-        $registros_por_pagina = "1";
+        $registros_por_pagina = "6";
 
         // (int) total de registros de la tabla ponentes
         $total = Ponente::total();
@@ -43,7 +43,8 @@ class PonentesController {
         }
 
         $ponentes = Ponente::paginar($registros_por_pagina, $paginacion->offset());
-        //debuguear($ponentes);
+        // Si estamos en la ?page=1 -> Ponente::paginar(6, 0)
+        // Si estamos en la ?page=4 -> Ponente::paginar(6, 18)
 
         $router->render("admin/ponentes/index", [
             "titulo" => "Ponentes / Conferencistas",

@@ -18,6 +18,8 @@ class Paginacion {
     }
 
     // Retorna un int que representa un "salto" de registros de lo que se quiera paginar, para armar el paginado (VIDEO 723)
+    // Si queremos 6 registros por página y estamos en la URL con /ponentes?page=1, retorna 0, que será el OFFSET en la consulta SQL a la tabla ponentes (o sea, "saltarse" 0 registros)
+    // Si queremos 6 registros por página y estamos estamos en la URL con /ponentes?page=7, retorna 42, que será el OFFSET en la consulta SQL a la tabla ponentes (o sea, "saltarse" 42 registros)
     public function offset() {
         return $this->registros_por_pagina * ($this->pagina_actual - 1);
     }
@@ -44,7 +46,7 @@ class Paginacion {
 
     public function enlace_anterior() {
         $html = "";
-        if($this->pagina_anterior()) {
+        if($this->pagina_anterior()) { // si el return es FALSE no se imprimirá el <a>
             $html .= "
                 <a 
                     class=\"paginacion__enlace paginacion__enlace--texto\" 
@@ -59,7 +61,7 @@ class Paginacion {
 
     public function enlace_siguiente() {
         $html = "";
-        if($this->pagina_siguiente()) {
+        if($this->pagina_siguiente()) { // si el return es FALSE no se imprimirá el <a>
             $html .= "
                 <a 
                     class=\"paginacion__enlace paginacion__enlace--texto\" 
