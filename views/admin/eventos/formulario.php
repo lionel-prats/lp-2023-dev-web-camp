@@ -20,4 +20,15 @@
             id="descripcion"
             rows="8"></textarea>
     </div>
+    <div class="formulario__campo">
+        <label for="nombre" class="formulario__label">Categoría o Tipo de Evento</label>
+        <select class="formulario__select" name="categoria_id" id="categoria">
+            <option value="">- Seleccionar -</option>
+            <?php foreach($categorias as $categoria): ?>
+                <option value="<?php echo $categoria->id; ?>">
+                    <?php echo $categoria->nombre; ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+    </div>
 </fieldset>
