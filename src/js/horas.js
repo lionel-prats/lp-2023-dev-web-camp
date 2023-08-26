@@ -53,7 +53,17 @@
         }
 
         function seleccionarHora(e){
-            console.log(e.target.dataset.horaId);
+
+            // bloque para desmarcar la hora previamente seleccionada (si la hay), ante un nuevo click
+            const horaPrevia = document.querySelector(".horas__hora--seleccionada")
+            if(horaPrevia) {
+                horaPrevia.classList.remove("horas__hora--seleccionada")
+            }
+
+            // agrego la clase CSS para resaltar la hora seleccionada en el form
+            e.target.classList.add("horas__hora--seleccionada");
+            
+            // cargo en el input:hidden el id de la hora seleccionada
             inputHiddenHora.value = e.target.dataset.horaId
         }
     
