@@ -6,7 +6,8 @@
     if(horas) {
 
         // objeto en memoria -> va a contener el tipo de evento seleccionado (<select name="categoria_id">) y el día seleccionado (<input name="dia"> x 2) en el <form> de registro de eventos 
-        let busqueda = {
+        // Para esto, las claves del objeto coinciden con los atributos name de los elementos HTML
+        let busqueda = { 
             categoria_id: "",
             dia: ""
         }
@@ -24,6 +25,7 @@
         // función para cargar el objeto global busqueda con lo que el admin carga tanto en el <select> de categoria como en los inputs de selección del día del evento (función reutilizable)
         function terminoBusqueda(e) {
             busqueda[e.target.name] = e.target.value
+            console.log(busqueda);
         }
     
     }
