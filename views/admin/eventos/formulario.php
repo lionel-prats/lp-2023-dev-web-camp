@@ -8,7 +8,7 @@
             id="nombre"
             name="nombre"
             placeholder="Nombre Evento"
-            value="<?php echo $ponente->nombre ?? "" ?>"
+            value="<?php echo $evento->nombre; ?>"
         >
     </div>
     <div class="formulario__campo">
@@ -18,14 +18,18 @@
             placeholder="Descripción Evento" 
             name="descripcion" 
             id="descripcion"
-            rows="8"></textarea>
+            rows="8"
+        ><?php echo $evento->descripcion; ?></textarea>
     </div>
     <div class="formulario__campo">
         <label for="nombre" class="formulario__label">Categoría o Tipo de Evento</label>
         <select class="formulario__select" name="categoria_id" id="categoria">
             <option value="">- Seleccionar -</option>
             <?php foreach($categorias as $categoria): ?>
-                <option value="<?php echo $categoria->id; ?>">
+                <option 
+                    value="<?php echo $categoria->id; ?>"
+                    <?php echo $evento->categoria_id === $categoria->id ? "selected" : ""; ?>
+                >
                     <?php echo $categoria->nombre; ?>
                 </option>
             <?php endforeach; ?>
@@ -42,7 +46,7 @@
                     <input 
                         type="radio"
                         id="<?php echo strtolower($dia->nombre); ?>" 
-                        name="dia"
+                        name="dia_id"
                         value="<?php echo $dia->id; ?>"   
                     >
                 </div>
@@ -78,6 +82,7 @@
             id="disponibles"
             name="disponibles"
             placeholder="Ej. 20"
+            value="<?php echo $evento->disponibles; ?>"
         >
     </div>
 </fieldset>
