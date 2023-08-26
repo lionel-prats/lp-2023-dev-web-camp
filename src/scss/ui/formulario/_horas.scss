@@ -1,0 +1,20 @@
+@use "base/variables" as v;
+@use "base/mixins" as m;
+
+.horas {
+    @include m.reset-lista;
+    @include m.grid(1, 1rem);
+    @include m.tablet {
+        @include m.grid(2, 1rem);
+    };
+    &__hora {
+        padding: 1rem;
+        border: 1px solid v.$azul;
+        border-radius: 1rem;
+        text-align: center;
+        color: v.$azul;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
