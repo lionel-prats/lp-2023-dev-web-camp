@@ -80,5 +80,4 @@
             placeholder="Ej. 20"
         >
     </div>
-
 </fieldset>

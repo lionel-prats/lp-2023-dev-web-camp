@@ -8,10 +8,4 @@ class Hora extends ActiveRecord {
 
     public $id;
     public $hora;
-    
-    public function __construct($args = [])
-    {
-        $this->id = $args['id'] ?? null;
-        $this->hora = $args['hora'] ?? "";
-    }
 }
