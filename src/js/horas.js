@@ -39,19 +39,35 @@
                 const url = `http://localhost:3000/api/eventos-horario?dia_id=${dia}&categoria_id=${categoria_id}`
                 const resultado = await fetch(url)
                 const eventos = await resultado.json()
-                obtenerHorasDisponibles();
+
+                obtenerHorasDisponibles(eventos); 
             // } catch (error) {
             //     console.log(error);
             // }
         }
 
-        function obtenerHorasDisponibles(){
+        // para obtener del DOM los <li> con las horas para seleccionar y quedar escuchando por un click
+        function obtenerHorasDisponibles(eventos){
+
+            // armo un array con los id de las horas (tabla horas) ya asociadas a algún registro en la tabla eventos
+            const horasTomadas = eventos.map( evento => evento.hora_id)
+
+            // selecciono todos los <li> hijos del <element id="horas"> (es decir, todos los <li> hijos de <div id="horas">)
+            const listadoHoras = document.querySelectorAll("#horas li")
+
+            const resultado = listadoHoras.filter( li => horasTomadas.includes(li.dataset.horaId) )
+
+            console.log(listadoHoras);
+            console.log(horasTomadas);
+            console.log(resultado);
+
 
             // selecciono todos los <li> hijos del <element id="horas"> (es decir, todos los <li> hijos de <div id="horas">)
             const horasDisponibles = document.querySelectorAll("#horas li")
             horasDisponibles.forEach( hora => hora.addEventListener("click", seleccionarHora))
         }
 
+        // funcion para marcar en el DOM la hora seleccionada y desmarcar la que pudiera haber previamente, y cargar el input:hidden con el id de la hora seleccionada
         function seleccionarHora(e){
 
             // bloque para desmarcar la hora previamente seleccionada (si la hay), ante un nuevo click

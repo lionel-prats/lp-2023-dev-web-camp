@@ -335,3 +335,9 @@ JavaScript vvv
 })()
 
 *** En JavaScript, es importante finalizar el bloque de un IIFE con ";" para que no rompa la compilación en un archivo común (/public/build/js/bundle.min.js)
+
+----- 
+
+VIDEO 741
+
+cursor: not-allowed; // Propiedad CSS para que queda muy bien con un :hover sobre un elemento HTML factible de ser clickeado/seleccionado (enlaces, botones, inputs, etc.) para indicarle al usuario que no puede ser seleccionado (cuando sea que lo requiramos)

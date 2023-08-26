@@ -20,5 +20,13 @@
             background-color: v.$azul;
             color: v.$blanco;
         }
+        &--deshabilitada {
+            border: 1px solid v.$gris;
+            color: v.$gris;
+            opacity: .5;
+            &:hover {
+                cursor: not-allowed;
+            }
+        }
     }
 }

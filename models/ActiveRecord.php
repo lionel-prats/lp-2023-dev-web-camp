@@ -160,7 +160,7 @@ class ActiveRecord {
             }
         }
         $resultado = self::consultarSQL($query);
-        return array_shift( $resultado );
+        return $resultado;
     }
     
     // Retorna el total de registros de una tabla
