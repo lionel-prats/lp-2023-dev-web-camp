@@ -149,7 +149,7 @@ class ActiveRecord {
         return array_shift( $resultado );
     }
 
-    // 
+    // Busca registros en una tabla filtrando por 1 o más columnas (siempre concatenando con AND)
     public static function whereArray($array = []) {
         $query = "SELECT * FROM " . static::$tabla . " WHERE ";
         foreach($array as $key => $value) {

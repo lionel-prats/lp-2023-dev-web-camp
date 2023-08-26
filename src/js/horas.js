@@ -14,7 +14,7 @@
         
         const categoria = document.querySelector("[name='categoria_id']") 
         
-        // selecciono los elementos con name="dia" (los <inputs type="radio">) del <form> de registro de eventos
+        // selecciono los elementos HTML con name="dia" (los <inputs type="radio">) del <form> de registro de eventos
         const dias = document.querySelectorAll("[name='dia']") 
 
         const inputHiddenDia = document.querySelector("[name='dia_id']") 
@@ -25,7 +25,27 @@
         // función para cargar el objeto global busqueda con lo que el admin carga tanto en el <select> de categoria como en los inputs de selección del día del evento (función reutilizable)
         function terminoBusqueda(e) {
             busqueda[e.target.name] = e.target.value
-            console.log(busqueda);
+            // si el objeto global busqueda está inclompleto salgo de la función
+            if(Object.values(busqueda).includes("")){
+                return
+            } 
+            buscarEventos();
+        }
+
+        async function buscarEventos() { // Petición a nuestra API
+            const { dia, categoria_id } = busqueda
+            // try {
+                const url = `http://localhost:3000/api/eventos-horario?dia_id=${dia}&categoria_id=${categoria_id}`
+                const resultado = await fetch(url)
+                const eventos = await resultado.json()
+                obtenerHorasDisponibles();
+            // } catch (error) {
+            //     console.log(error);
+            // }
+        }
+
+        function obtenerHorasDisponibles(){
+            
         }
     
     }
