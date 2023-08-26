@@ -35,6 +35,8 @@
             <?php endforeach; ?>
         </select>
     </div>
+
+    
     <div class="formulario__campo">
         <label for="nombre" class="formulario__label">Selecciona el día</label>
         <div class="formulario__radio">
@@ -46,16 +48,20 @@
                     <input 
                         type="radio"
                         id="<?php echo strtolower($dia->nombre); ?>" 
-                        name="dia_id"
+                        name="dia"
                         value="<?php echo $dia->id; ?>"   
                     >
                 </div>
             <?php endforeach; ?>
         </div>
+        <input type="hidden" name="dia_id" value="">
     </div>
+
+
+
     <div id="horas" class="formulario__campo">
         <label class="formulario__label">Seleccionar Hora</label>
-        <ul class="horas">
+        <ul id="horas" class="horas">
             <?php foreach($horas as $hora): ?>
                 <li class="horas__hora"><?php echo $hora->hora; ?></li>
             <?php endforeach; ?>

@@ -77,6 +77,6 @@
         }
     }
 
-})()
+})(); // En JavaScript, es importante finalizar el bloque de un IIFE con ";" para que no rompa la compilación en un archivo común (/public/build/js/bundle.min.js) (VIDEO 735)
 
 
