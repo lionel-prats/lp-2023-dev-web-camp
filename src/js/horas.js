@@ -2,7 +2,7 @@
 (function() {
 
     const horas = document.querySelector("#horas")
-
+    
     if(horas) {
 
         // objeto en memoria -> va a contener el tipo de evento seleccionado (<select name="categoria_id">) y el día seleccionado (<input name="dia"> x 2) en el <form> de registro de eventos 
@@ -18,6 +18,7 @@
         const dias = document.querySelectorAll("[name='dia']") 
 
         const inputHiddenDia = document.querySelector("[name='dia_id']") 
+        const inputHiddenHora = document.querySelector("[name='hora_id']") 
 
         categoria.addEventListener("change", terminoBusqueda)
         dias.forEach( dia => dia.addEventListener("change", terminoBusqueda))
@@ -45,7 +46,15 @@
         }
 
         function obtenerHorasDisponibles(){
-            
+
+            // selecciono todos los <li> hijos del <element id="horas"> (es decir, todos los <li> hijos de <div id="horas">)
+            const horasDisponibles = document.querySelectorAll("#horas li")
+            horasDisponibles.forEach( hora => hora.addEventListener("click", seleccionarHora))
+        }
+
+        function seleccionarHora(e){
+            console.log(e.target.dataset.horaId);
+            inputHiddenHora.value = e.target.dataset.horaId
         }
     
     }
