@@ -26,13 +26,25 @@
 
         // función para cargar el objeto global busqueda con lo que el admin carga tanto en el <select> de categoria como en los inputs de selección del día del evento (función reutilizable)
         function terminoBusqueda(e) {
-            busqueda[e.target.name] = e.target.value
+            
+            busqueda[e.target.name] = e.target.value // reescribo el valor que corresponda en el objeto global busqueda (categoria_id o dia)
+
+            // reinicio los campos ocultos de dia y hora y los tags de horas ante cada cambio en el select de categorias o en los input de dia
+            inputHiddenHora.value = ""
+            inputHiddenDia.value = ""
+            
+            // desmarco la hora previamente seleccionada (si la hay)
+            const horaPrevia = document.querySelector(".horas__hora--seleccionada")
+            if(horaPrevia) {
+                horaPrevia.classList.remove("horas__hora--seleccionada")
+            }
+
             // si el objeto global busqueda está inclompleto salgo de la función
             // Genero un array con los valores del objeto y verifico si alguno es ""
             if(Object.values(busqueda).includes("")){
                 return
             } 
-            buscarEventos(); // se va a ejecutar solo si el objeto global busqueda está completo
+            buscarEventos(); // peticion a nuestra API por los eventos de la categoría y día seleccionados por el admin para saber que horarios hay disponibles (se va a ejecutar solo si el objeto global busqueda está completo)
         }
 
         async function buscarEventos() { // Petición a nuestra API
@@ -41,6 +53,7 @@
                 const url = `http://localhost:3000/api/eventos-horario?dia_id=${dia}&categoria_id=${categoria_id}`
                 const resultado = await fetch(url)
                 const eventos = await resultado.json()
+                // console.log(`consulta a la API: ${eventos.length} registros`);
                 obtenerHorasDisponibles(eventos); 
 
             // } catch (error) {
@@ -48,22 +61,33 @@
             // }
         }
 
-        // para obtener del DOM los <li> con las horas para seleccionar y quedar escuchando por un click
+        // para determinar visualmente en el DOM los <li> con las horas habilitadas para seleccionar y quedar escuchando por un click
         function obtenerHorasDisponibles(eventos){
 
-            // con un .map armo un array con los valores hora_id (referencia a la tabla horas) de cada evento iterado (eventos es una consulta via fetch a nuestra API, a la tabla eventos)
-            // será un array de tipo ["2", 4, "1"] donde cada elemento es el id de algún registro de la tabla horas 
-            const horasTomadas = eventos.map( evento => evento.hora_id)
-            
             // NodeList con todos los <li> hijos del <element id="horas"> (es decir, todos los <li> hijos de <div id="horas">)
             const listadoHoras = document.querySelectorAll("#horas li")
 
+            // por default deshabilito visualmente todos los tags de horas cada vez que se haga una nueva petición a la API por las combinaciones que pueda ir haciendo el admin en el front (en el cliente, antes del submit). El código que sigue removerá esta clase habilitando las que correspondan según la combinación de categoría y día seleccionada por el admin
+            // forEach es array method pero se puede usar sin problema en un NodeList
+            listadoHoras.forEach( li => {
+                li.classList.add("horas__hora--deshabilitada") 
+
+                // dejo de escuchar moentaneamente por el click en todos los tags de hora para evitar errores en caso de que el admin cambie momentaneamente los parametros de busqueda (que implica una nueva peticion a la API) para que en ningun caso se puedan seleccionar horas deshabilitada
+                li.removeEventListener('click', seleccionarHora)
+
+            })
+
+            // con un .map armo un array con los valores hora_id (referencia a la tabla horas) de cada evento iterado (eventos es una consulta via fetch a nuestra API, a la tabla eventos) para saber que horas NO están disponibles para la combinación de categoría y día seleccionado por el admin antes del submit
+            // será un array de tipo ["2", 4, "1"] donde cada elemento es el hora_id de cada evento registrado para la combinación categoría-día que hizo el admin previo al submit (a su vez, son referencia a la tabla horas) 
+            const horasTomadas = eventos.map( evento => evento.hora_id)
+            
             // convierto el NodeList anterior en array de nodos para poder operarlo como array y usar los métodos nativos de JS (VIDEO 742)
             const listadoHorasArray = Array.from(listadoHoras);
             
             // genero un array de nodos compuesto por los <li> de horas para seleccionar en el form de creacion de eventos, cuyos data-hora-id (que son los id correspondientes en la tabla horas) no estén incluidos en el array horasTomadas (que es el array de horas ya asignadas a eventos en la categoría y día seleccionados previamente por el admin para este nuevo evento)
             const resultado = listadoHorasArray.filter( li => !horasTomadas.includes(li.dataset.horaId) )
             
+            // itero el array de nodos de horas disponibles para sacarle la clase que deshabilita visualmente el tag de hora para que el usuario sepa cuales son las horas disponibles y no disponibles
             // reflección: resultado es una variable distinta a la que originalmente capturó los <li> del DOM (listadoHoras). Sin embargo sirve para manipular los elementos capturados en el DOM (en este caso quitarles una clase)
             resultado.forEach( li => li.classList.remove("horas__hora--deshabilitada") )
 
@@ -84,8 +108,11 @@
             // agrego la clase CSS para resaltar la hora seleccionada en el form
             e.target.classList.add("horas__hora--seleccionada");
             
-            // cargo en el input:hidden el id de la hora seleccionada
+            // cargo en el input:hidden "de hora" el id de la hora seleccionada
             inputHiddenHora.value = e.target.dataset.horaId
+            
+            // cargo en el input:hidden "de día" el id del día seleccionado
+            inputHiddenDia.value = document.querySelector("[name='dia']:checked").value
         }
     
     }
