@@ -5,6 +5,7 @@ require_once __DIR__ . '/../includes/app.php';
 use MVC\Router;
 
 use Controllers\APIEventos;
+use Controllers\APIPonentes;
 
 use Controllers\AuthController;
 use Controllers\EventosController;
@@ -55,6 +56,7 @@ $router->post('/admin/eventos/crear', [EventosController::class, 'crear']);
 // $router->post('/admin/eventos/eliminar', [EventosController::class, 'eliminar']);
 
 $router->get('/api/eventos-horario', [APIEventos::class, 'index']);
+$router->get('/api/ponentes', [APIPonentes::class, 'index']);
 
 $router->get('/admin/registrados', [RegistradosController::class, 'index']);
 

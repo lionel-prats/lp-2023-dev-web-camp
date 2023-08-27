@@ -75,7 +75,14 @@
     </div>
 </fieldset>
 <fieldset class="formulario__fieldset">
-    <legend class="formulario__legend">Información Exta</legend>
+    <legend class="formulario__legend">Información Extra</legend>
+    
+    
+    
+    
+    
+    
+    
     <div class="formulario__campo">
         <label for="ponentes" class="formulario__label">Ponente</label>
         <input 
@@ -85,6 +92,16 @@
             placeholder="Buscar Ponente"
         >
     </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="formulario__campo">
         <label for="disponibles" class="formulario__label">Lugares Disponibles</label>
         <input 
