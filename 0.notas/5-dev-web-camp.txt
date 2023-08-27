@@ -341,3 +341,31 @@ JavaScript vvv
 VIDEO 741
 
 cursor: not-allowed; // Propiedad CSS para que queda muy bien con un :hover sobre un elemento HTML factible de ser clickeado/seleccionado (enlaces, botones, inputs, etc.) para indicarle al usuario que no puede ser seleccionado (cuando sea que lo requiramos)
+
+----- 
+
+JavaScript
+
+A partir de un objeto, forma de construir un array de las claves y de los valores del mismo vvv
+
+let busqueda = { 
+  categoria_id: "5",
+  dia: "Pepe"
+}
+console.log(Object.keys(busqueda)); // ['categoria_id', 'dia']
+console.log(Object.values(busqueda)); // ['5', 'Pepe']
+
+----- 
+
+VIDEO 742
+
+JavaScript -> forma de "convertir" un NodeList en un Array(0)
+
+En este ejemplo capturo una serie de <li> (NodeList) en la variable listadoHoras.
+Luego almacento en la variable listadoHorasArray la "conversión" a array de este NodeList.
+Esto me va a permitir utilizar métodos de array (.map, .filter, etc.) para operar el NodeList vvv
+
+const listadoHoras = document.querySelectorAll("#horas li")
+const listadoHorasArray = Array.from(listadoHoras);
+
+*** Si hacemos un console.log() de ambas variables, podemos ver en la consola que en listadoHoras -> [[Prototype]]: NodeList mientras que en listadoHorasArray -> [[Prototype]]: Array(0)
