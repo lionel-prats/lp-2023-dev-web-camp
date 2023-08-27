@@ -369,3 +369,33 @@ const listadoHoras = document.querySelectorAll("#horas li")
 const listadoHorasArray = Array.from(listadoHoras);
 
 *** Si hacemos un console.log() de ambas variables, podemos ver en la consola que en listadoHoras -> [[Prototype]]: NodeList mientras que en listadoHorasArray -> [[Prototype]]: Array(0)
+
+----- 
+
+VIDEO 745 
+
+JavaScript - Evento Input (ponentes.js)
+
+El evento input se dispara cuando escribo en un campo o copio y pego o elimino, etc. Todo esto va a estar disparando este evento vvv 
+
+ponentesInput.addEventListener("input", buscarPonentes);
+
+*** hice pruebas y es cierto: a diferencia por ejemplo del evento keypress (que lo usamos para el form creacion y edicion de ponentes), el evento input se dispara con algunas acciones que con el anterior no: pegar algo en el input, cortar algo que seleccionamos en el input, copiar algo que seleccionamos en el input, deshacer un cambio con Ctrl+z, etc
+
+----- 
+
+Expresiones regulares en JavaScript
+
+"Una expresión regular es una forma de buscar un patrón en un valor"
+
+Ejemplo práctico de como usar una expresión regular para un buscador vvv 
+
+let nombre = "lionel";
+
+let stringBuscado = "ONe";
+
+let expresion = new RegExp(stringBuscado, "i"); // creo una expresión regular (RegExp) utilizando el valor de stringBuscado. El modificador "i" se utiliza para que la expresión regular sea insensible a mayúsculas y minúsculas, lo que significa que buscará el subtring "ONe" en donde le indiquemos sin importar si las letras están en mayúsculas o minúsculas.
+
+console.log(nombre.search(stringBuscado)); // imprime -1, ya que "ONe" (stringBuscado) no se encuentra en la variable nombre (no coinciden las mayúsculas/minúsculas)
+
+console.log(nombre.search(expresion)); // imprime 2, ya que esta vez buscamos usando la expresión regular que creamos anteriormente (que nos va a servir para buscar "ONe" en cualquier string, siendo insensible a mayusculas/minusculas; si se encuentra la secuencia de caracteres, el array method search() va a retornar la posición donde se ubica el primer caracter del substring en el string, en este ejemplo "ONe" empieza en la posición 2 de "Lionel")

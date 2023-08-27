@@ -35,8 +35,6 @@
             <?php endforeach; ?>
         </select>
     </div>
-
-    
     <div class="formulario__campo">
         <label for="nombre" class="formulario__label">Selecciona el día</label>
         <div class="formulario__radio">
@@ -56,9 +54,6 @@
         </div>
         <input type="hidden" name="dia_id" value="">
     </div>
-
-
-
     <div id="horas" class="formulario__campo">
         <label class="formulario__label">Seleccionar Hora</label>
         <ul id="horas" class="horas">
@@ -82,6 +77,17 @@
     
     
     
+
+
+
+
+
+
+
+
+
+
+
     
     <div class="formulario__campo">
         <label for="ponentes" class="formulario__label">Ponente</label>
@@ -94,6 +100,16 @@
     </div>
     
     
+    
+
+
+
+
+
+
+
+
+
     
     
     
