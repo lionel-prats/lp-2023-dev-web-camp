@@ -28,7 +28,13 @@
                             <?php echo $evento->nombre; ?>
                         </td>
                         <td class="table__td">
-                            <?php echo $evento->categoria_id; ?>
+                            <?php echo $evento->categoria->nombre; ?>
+                        </td>
+                        <td class="table__td">
+                            <?php echo $evento->dia_id . " " . $evento->hora_id; ?>
+                        </td>
+                        <td class="table__td">
+                            <?php echo $evento->ponente_id; ?>
                         </td>
                         
                     </tr>
