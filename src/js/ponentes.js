@@ -10,6 +10,8 @@
 
         const listadoPonentes = document.querySelector("#listado-ponentes"); // <ul> donde se inyectará el HTML con los ponentes de ponentesFiltrados
 
+        const ponenteHidden = document.querySelector("[name='ponente_id']") 
+
         obtenerPonentes(); // peticion a nuestra API
 
         ponentesInput.addEventListener("input", buscarPonentes); // escucho por cambios en el input del ponente para generar dinamicamente el buscador en la vista
@@ -72,7 +74,8 @@
                     ponenteHTML.classList.add("listado-ponentes__ponente");   
                     ponenteHTML.textContent = ponente.nombre;
                     ponenteHTML.dataset.ponenteId = ponente.id;
-                    
+                    ponenteHTML.onclick = seleccionarPonente;
+
                     listadoPonentes.appendChild(ponenteHTML);
                 });
             } else {
@@ -83,14 +86,19 @@
                 listadoPonentes.appendChild(noResultados);
             }
 
+            function seleccionarPonente(e) {
+                const ponente = e.target;
+                const ponentePrevio = document.querySelector(".listado-ponentes__ponente--seleccionado")
+                if(ponentePrevio) {
+                    ponentePrevio.classList.remove("listado-ponentes__ponente--seleccionado")
+                }
+                
+                ponente.classList.add("listado-ponentes__ponente--seleccionado");
 
-            
-            
+                ponenteHidden. value = ponente.dataset.ponenteId
+            }
         }
-
     }
 
-    
-    
 })(); // En JavaScript, es importante finalizar el bloque de un IIFE con ";" para que no rompa la compilación en un archivo común (/public/build/js/bundle.min.js) (VIDEO 735)
 

@@ -72,23 +72,6 @@
 <fieldset class="formulario__fieldset">
     <legend class="formulario__legend">Información Extra</legend>
     
-    
-    
-    
-    
-    
-
-
-
-
-
-
-
-
-
-
-
-    
     <div class="formulario__campo">
         <label for="ponentes" class="formulario__label">Ponente</label>
         <input 
@@ -97,30 +80,16 @@
             id="ponentes"
             placeholder="Buscar Ponente"
         >
-
         <!-- buscador de ponentes (HTML inyectado desde ponentes.js) -->
-        <ul id="listado-ponentes" class="listado-ponentes"></ul>
-    
+        <ul id="listado-ponentes" class="listado-ponentes">
+            <li class="listado-ponentes__ponente">María José Leoz</li>
+            <li class="listado-ponentes__ponente">María José Leoz</li>
+            <li class="listado-ponentes__ponente">María José Leoz</li>
+            <li class="listado-ponentes__ponente">María José Leoz</li>
+            <li class="listado-ponentes__ponente">María José Leoz</li>
+        </ul>
+        <input type="hidden" name="ponente_id" value="">
     </div>
-    
-    
-    
-
-
-
-
-
-
-
-
-
-    
-    
-    
-    
-    
-    
-    
     
     <div class="formulario__campo">
         <label for="disponibles" class="formulario__label">Lugares Disponibles</label>
