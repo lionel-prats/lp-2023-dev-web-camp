@@ -97,6 +97,10 @@
             id="ponentes"
             placeholder="Buscar Ponente"
         >
+
+        <!-- buscador de ponentes (HTML inyectado desde ponentes.js) -->
+        <ul id="listado-ponentes" class="listado-ponentes"></ul>
+    
     </div>
     
     

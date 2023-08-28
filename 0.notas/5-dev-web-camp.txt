@@ -399,3 +399,16 @@ let expresion = new RegExp(stringBuscado, "i"); // creo una expresión regular (
 console.log(nombre.search(stringBuscado)); // imprime -1, ya que "ONe" (stringBuscado) no se encuentra en la variable nombre (no coinciden las mayúsculas/minúsculas)
 
 console.log(nombre.search(expresion)); // imprime 2, ya que esta vez buscamos usando la expresión regular que creamos anteriormente (que nos va a servir para buscar "ONe" en cualquier string, siendo insensible a mayusculas/minusculas; si se encuentra la secuencia de caracteres, el array method search() va a retornar la posición donde se ubica el primer caracter del substring en el string, en este ejemplo "ONe" empieza en la posición 2 de "Lionel")
+
+----- 
+
+VIDEO 746 
+
+JavaScript -> Alternativa más performante para borrar el .innerHTML de un elemento en el DOM vvv
+
+// listadoPonentes.innerHTML = "";
+
+while(listadoPonentes.firstChild) {
+    listadoPonentes.removeChild(listadoPonentes.firstChild);
+    // listadoTareas.firstChild.remove();
+}
