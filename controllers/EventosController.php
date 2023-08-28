@@ -6,6 +6,7 @@ use Model\Dia;
 use Model\Hora;
 use MVC\Router;
 use Model\Evento;
+use Model\Ponente;
 use Model\Categoria;
 use Classes\Paginacion;
 
@@ -35,12 +36,12 @@ class EventosController {
 
         $eventos = Evento::paginar($registros_por_pagina, $paginacion->offset());
 
-        // echo "<pre>";
         foreach($eventos as $evento) {
             $evento->categoria = Categoria::find($evento->categoria_id);
-            // print_r($evento);
+            $evento->dia = Dia::find($evento->dia_id);
+            $evento->hora = Hora::find($evento->hora_id);
+            $evento->ponente = Ponente::find($evento->ponente_id);
         }
-        // debuguear($eventos);
 
         $router->render("admin/eventos/index", [
             "titulo" => "Conferencias y Workshops",
