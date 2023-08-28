@@ -7,13 +7,43 @@ use Model\Hora;
 use MVC\Router;
 use Model\Evento;
 use Model\Categoria;
+use Classes\Paginacion;
 
 class EventosController {
     public static function index(Router $router) {
+
+        if(!is_auth()) { 
+            header("Location: /login");
+        } elseif(!is_admin()) {
+            header("Location: /finalizar-registro");
+        }
+
+        $pagina_actual = $_GET["page"];
+        $pagina_actual = filter_var($pagina_actual, FILTER_VALIDATE_INT); 
+        if(!$pagina_actual || $pagina_actual < 1) {
+            header("Location: /admin/eventos?page=1");
+        }
+        
+        $registros_por_pagina = "10";
+        $total = Evento::total();
+
+        $paginacion = new Paginacion($pagina_actual, $registros_por_pagina, $total);
+
+        if($paginacion->total_paginas() < $pagina_actual) {
+            header("Location: /admin/eventos?page=1");
+        }
+
+        $eventos = Evento::paginar($registros_por_pagina, $paginacion->offset());
+
+        //debuguear($eventos);
+
         $router->render("admin/eventos/index", [
-            "titulo" => "Conferencias y Workshops"
+            "titulo" => "Conferencias y Workshops",
+            "eventos" => $eventos,
+            "paginacion" => $paginacion->paginacion()
         ]);
     }
+
     public static function crear (Router $router) {
         $alertas = [];
 
