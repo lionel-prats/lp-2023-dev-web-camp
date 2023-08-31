@@ -21,6 +21,32 @@
             rows="8"
         ><?php echo $evento->descripcion; ?></textarea>
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <div class="formulario__campo">
         <label for="nombre" class="formulario__label">Categoría o Tipo de Evento</label>
         <select class="formulario__select" name="categoria_id" id="categoria">
@@ -48,11 +74,15 @@
                         id="<?php echo strtolower($dia->nombre); ?>" 
                         name="dia"
                         value="<?php echo $dia->id; ?>"   
+                        <?php echo $evento->dia_id === $dia->id ? "checked" : ""; ?>
                     >
                 </div>
             <?php endforeach; ?>
         </div>
-        <input type="hidden" name="dia_id" value="">
+        <input 
+            type="hidden" name="dia_id" 
+            value="<?php echo $evento->dia_id; ?>"
+        >
     </div>
     <div id="horas" class="formulario__campo">
         <label class="formulario__label">Seleccionar Hora</label>
@@ -66,8 +96,28 @@
                 </li>
             <?php endforeach; ?>
         </ul>
-        <input type="hidden" name="hora_id" value="">
+        <input type="hidden" name="hora_id" value="<?php echo $evento->hora_id; ?>">
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </fieldset>
 <fieldset class="formulario__fieldset">
     <legend class="formulario__legend">Información Extra</legend>

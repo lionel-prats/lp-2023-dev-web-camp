@@ -80,4 +80,129 @@ class EventosController {
             "evento" => $evento
         ]);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public static function editar (Router $router) {
+
+        if(!is_auth()) {
+            header("Location: /login");
+        } elseif(!is_admin()) { 
+            header("Location: /finalizar-registro");
+        }
+
+        $alertas = [];
+
+        $id = $_GET["id"];
+        $id = filter_var($_GET["id"], FILTER_VALIDATE_INT) ;
+
+        if(!$id) {
+            header("Location: /admin/eventos");
+        }
+
+        $categorias = Categoria::all("ASC");
+        $dias = Dia::all("ASC");
+        $horas = Hora::all("ASC");
+
+        $evento = Evento::find($id);
+
+        if(!$evento) {
+            header("Location: /admin/eventos");
+        }
+
+        if($_SERVER["REQUEST_METHOD"] === "POST") {
+            $evento->sincronizar($_POST);
+            //debuguear($evento);
+            $alertas = $evento->validar();
+            if(empty($alertas)) {
+                $resultado = $evento->guardar();
+                if($resultado) {
+                    header("Location: /admin/eventos");
+                }
+            }
+        }
+        
+        //debuguear($evento);
+
+        $router->render("admin/eventos/editar", [
+            "titulo" => "Editar Evento",
+            "alertas" => $alertas,
+            "categorias" => $categorias,
+            "dias" => $dias,
+            "horas" => $horas,
+            "evento" => $evento
+        ]);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

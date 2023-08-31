@@ -5,13 +5,6 @@
     
     if(horas) {
 
-        // objeto en memoria -> va a contener el tipo de evento seleccionado (<select name="categoria_id">) y el día seleccionado (<input name="dia"> x 2) en el <form> de registro de eventos 
-        // Para esto, las claves del objeto coinciden con los atributos name de los elementos HTML
-        let busqueda = { 
-            categoria_id: "",
-            dia: ""
-        }
-        
         // <select name="categoria_id"> -> select de categorías para la creación de un evento
         const categoria = document.querySelector("[name='categoria_id']") 
         
@@ -23,6 +16,40 @@
 
         categoria.addEventListener("change", terminoBusqueda) // escucho por cambios en el select de categorias
         dias.forEach( dia => dia.addEventListener("change", terminoBusqueda)) // escucho por cambios en los inputs de día del evento
+
+        const detallePrevioEvento = {
+            categoria_id: categoria.value || "", 
+            dia: inputHiddenDia.value || "",
+            hora: inputHiddenHora.value || ""
+        }
+        // objeto en memoria -> va a contener el tipo de evento seleccionado (<select name="categoria_id">) y el día seleccionado (<input name="dia"> x 2) en el <form> de registro de eventos 
+        // Para esto, las claves del objeto coinciden con los atributos name de los elementos HTML
+        let busqueda = { 
+            // || -> equivalente al ?? de php (VIDEO 752)
+            // +... -> convierte un numero en formato string (int o float), en formato numero (int o float) (VIDEO 752)
+            categoria_id: +categoria.value || "", 
+            dia: +inputHiddenDia.value || ""
+        }
+
+        // Bloque que se ejecutará solo cuando se accede al form de edición de un evento (ya que en el form de creacion, busqueda inicia vacío y se llena con la interacción del usuario en el select de categorias e inputs de dia) (VIDEO 752)
+        // forma de verificar si un objeto está completo
+        if(!Object.values(busqueda).includes("")){
+            async function iniciarApp() {
+                // LO QUE ENTIENDO: el await está indicando que tiene que terminar de ejecutarse buscarEventos (y todo su desencadenamiento de funciones) para que luego se ejecute el codigo a continuacion dentro de esta misma funcion (el bloque para quitarle la clase "horas__hora--deshabilitada" al tag de hora asociado horiginalmente al evento a editar) (VIDEO 752)
+                await buscarEventos();
+
+                // BLOQUE para quitarle la clase "horas__hora--deshabilitada" al tag de hora asociado horiginalmente al evento a editar vvv
+                // id de la hora seleccionada originalmente del evento a editar 
+                // identifico la hora seleccionada originalmente en el panel de horas del form
+                const horaSeleccionada = document.querySelector(`[data-hora-id="${inputHiddenHora.value}"]`);
+                // le quito la clase que deshabilita visualmente un tag de hora al li con la hora originalmente seleccionada porque tengo la intención de mostrarla como seleccionada
+                horaSeleccionada.classList.remove("horas__hora--deshabilitada");
+                horaSeleccionada.classList.add("horas__hora--seleccionada");
+
+                horaSeleccionada.onclick = seleccionarHora;
+            }
+            iniciarApp();
+        } 
 
         // función para cargar el objeto global busqueda con lo que el admin carga tanto en el <select> de categoria como en los inputs de selección del día del evento (función reutilizable)
         function terminoBusqueda(e) {
@@ -63,7 +90,8 @@
 
         // para determinar visualmente en el DOM los <li> con las horas habilitadas para seleccionar y quedar escuchando por un click
         function obtenerHorasDisponibles(eventos){
-
+            
+            
             // NodeList con todos los <li> hijos del <element id="horas"> (es decir, todos los <li> hijos de <div id="horas">)
             const listadoHoras = document.querySelectorAll("#horas li")
 
@@ -72,7 +100,7 @@
             listadoHoras.forEach( li => {
                 li.classList.add("horas__hora--deshabilitada") 
 
-                // dejo de escuchar moentaneamente por el click en todos los tags de hora para evitar errores en caso de que el admin cambie momentaneamente los parametros de busqueda (que implica una nueva peticion a la API) para que en ningun caso se puedan seleccionar horas deshabilitada
+                // dejo de escuchar momentaneamente por el click en todos los tags de hora para evitar errores en caso de que el admin cambie momentaneamente los parametros de busqueda (que implica una nueva peticion a la API) para que en ningun caso se puedan seleccionar horas deshabilitadas
                 li.removeEventListener('click', seleccionarHora)
 
             })
@@ -93,11 +121,31 @@
 
             // selecciono todos los <li> hijos del <element id="horas"> (es decir, todos los <li> hijos de <div id="horas">) excepto los que tengan la clase "horas__hora--deshabilitada" para ejecutar un listener en ellos (VIDEO 742)
             const horasDisponibles = document.querySelectorAll("#horas li:not(.horas__hora--deshabilitada)")
+
+            compararSelecciones();
+            
             horasDisponibles.forEach( hora => hora.addEventListener("click", seleccionarHora))
+        }
+
+        // funcion para habilitar y seleccionar el horario elegido previamente si la combinacion original categoria|dia coincide con la combinacion previa al submit del form de edicion de evento
+        function compararSelecciones() {
+            const categoriaPrevia = +detallePrevioEvento.categoria_id;
+            const diaPrevio = +detallePrevioEvento.dia;
+            const horaPrevia = detallePrevioEvento.hora;
+
+            const categoriaActual = +busqueda.categoria_id;
+            const diaActual = +busqueda.dia;
+
+            if(categoriaPrevia === categoriaActual && diaPrevio === diaActual) {
+                document.querySelector(`[data-hora-id="${horaPrevia}"]`).classList.remove("horas__hora--deshabilitada");
+                document.querySelector(`[data-hora-id="${horaPrevia}"]`).classList.add("horas__hora--seleccionada");
+                inputHiddenHora.value = horaPrevia;
+            }
         }
 
         // funcion para marcar en el DOM la hora seleccionada y desmarcar la que pudiera haber previamente, y cargar el input:hidden con el id de la hora seleccionada
         function seleccionarHora(e){
+            
 
             // bloque para desmarcar la hora previamente seleccionada (si la hay), ante un nuevo click
             const horaPrevia = document.querySelector(".horas__hora--seleccionada")
