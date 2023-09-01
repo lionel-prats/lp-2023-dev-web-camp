@@ -44,7 +44,7 @@
                                 <i class="fa-solid fa-pencil"></i>
                                 Editar
                             </a>
-                            <form action="/admin/ponentes/eliminar" method="POST" class="table__formulario">
+                            <form action="/admin/eventos/eliminar" method="POST" class="table__formulario">
                                 <input type="hidden" name="id" value="<?php echo $evento->id; ?>">
                                 <button 
                                     type="submit"

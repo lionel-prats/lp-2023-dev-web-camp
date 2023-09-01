@@ -51,6 +51,11 @@ class EventosController {
     }
 
     public static function crear (Router $router) {
+        if(!is_auth()) { 
+            header("Location: /login");
+        } elseif(!is_admin()) { 
+            header("Location: /finalizar-registro");
+        }
         $alertas = [];
 
         $categorias = Categoria::all("ASC");
@@ -80,45 +85,6 @@ class EventosController {
             "evento" => $evento
         ]);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     public static function editar (Router $router) {
 
@@ -158,8 +124,6 @@ class EventosController {
                 }
             }
         }
-        
-        // debuguear($evento);
 
         $router->render("admin/eventos/editar", [
             "titulo" => "Editar Evento",
@@ -171,38 +135,22 @@ class EventosController {
         ]);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public static function eliminar() {
+        if(!is_auth()) { 
+            header("Location: /login");
+        } elseif(!is_admin()) { 
+            header("Location: /finalizar-registro");
+        }
+        if($_SERVER["REQUEST_METHOD"] === "POST") {
+            $id = $_POST["id"];
+            $evento = Evento::find($id);
+            if(!$evento) {
+                header("Location: /admin/eventos");
+            }
+            $resultado = $evento->eliminar();
+            if($resultado){
+                header("Location: /admin/eventos");
+            }
+        }
+    }
 }
