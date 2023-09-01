@@ -34,7 +34,7 @@ class EventosController {
             header("Location: /admin/eventos?page=1");
         }
 
-        $eventos = Evento::paginar($registros_por_pagina, $paginacion->offset());
+        $eventos = Evento::paginar($registros_por_pagina, $paginacion->offset(), "ASC");
 
         foreach($eventos as $evento) {
             $evento->categoria = Categoria::find($evento->categoria_id);
@@ -42,7 +42,7 @@ class EventosController {
             $evento->hora = Hora::find($evento->hora_id);
             $evento->ponente = Ponente::find($evento->ponente_id);
         }
-
+        
         $router->render("admin/eventos/index", [
             "titulo" => "Conferencias y Workshops",
             "eventos" => $eventos,
@@ -159,7 +159,7 @@ class EventosController {
             }
         }
         
-        //debuguear($evento);
+        // debuguear($evento);
 
         $router->render("admin/eventos/editar", [
             "titulo" => "Editar Evento",

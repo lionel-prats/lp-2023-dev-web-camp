@@ -132,8 +132,14 @@
         >
         <!-- buscador de ponentes (HTML inyectado desde ponentes.js) -->
         <ul id="listado-ponentes" class="listado-ponentes">
+            <!-- <li class="listado-ponentes__ponente">Lionel Prats</li> -->
+            <!-- <li class="listado-ponentes__ponente listado-ponentes__ponente--seleccionado">Mario Benedetti</li> -->
         </ul>
-        <input type="hidden" name="ponente_id" value="">
+        <input 
+            type="hidden" 
+            name="ponente_id" 
+            value="<?php echo $evento->ponente_id; ?>"
+        >
     </div>
     
     <div class="formulario__campo">

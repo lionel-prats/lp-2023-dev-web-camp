@@ -1,7 +1,7 @@
 // IIFE -> Inmediately Invoke Function Expression vvv
 (function() {
 
-    const ponentesInput = document.querySelector("#ponentes"); // input donde se carga el ponente de un evento a crear
+    const ponentesInput = document.querySelector("#ponentes"); // input donde se carga el ponente de un evento a crear/editar
 
     if(ponentesInput) {
 
@@ -10,11 +10,25 @@
 
         const listadoPonentes = document.querySelector("#listado-ponentes"); // <ul> donde se inyectará el HTML con los ponentes de ponentesFiltrados
 
+        // input oculto para cargar el id del ponente y benviar el dato al servidor
         const ponenteHidden = document.querySelector("[name='ponente_id']") 
 
         obtenerPonentes(); // peticion a nuestra API
 
         ponentesInput.addEventListener("input", buscarPonentes); // escucho por cambios en el input del ponente para generar dinamicamente el buscador en la vista
+
+        // si estamos en el form de editar un evento nos traemos los datos del ponente y lo imprimimos en el form
+        if(ponenteHidden.value) {
+            ( async() => {
+                const ponente = await obtenerPonente(ponenteHidden.value);
+                
+                const {nombre, apellido} = ponente;
+                const ponenteDOM = document.createElement("LI");
+                ponenteDOM.classList.add("listado-ponentes__ponente", "listado-ponentes__ponente--seleccionado");
+                ponenteDOM.textContent = `${nombre} ${apellido}`;
+                listadoPonentes.appendChild(ponenteDOM);
+            })();
+        }
 
         async function obtenerPonentes() { // petición a la API
             try {
@@ -27,6 +41,13 @@
             } catch (error) {
                 console.log(error);
             }
+        }
+
+        async function obtenerPonente(id) {
+            const url = `/api/ponente?id=${id}`;
+            const respuesta = await fetch(url);
+            const resultado = await respuesta.json();
+            return resultado;
         }
 
         function formatearPonentes(arrayPonentes = []) { // completo el array ponentes a partir de la respuesta de la API

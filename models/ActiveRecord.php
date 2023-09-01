@@ -128,7 +128,7 @@ class ActiveRecord {
     }
 
     // Paginar los registros
-    public static function paginar($por_pagina, $offset) {
+    public static function paginar($por_pagina, $offset, $order = "DESC") {
         /* 
         SELECT * 
         FROM ponentes 
@@ -136,7 +136,7 @@ class ActiveRecord {
         LIMIT 5
         OFFSET 5
         */
-        $query = "SELECT * FROM " . static::$tabla . " ORDER BY id DESC LIMIT {$por_pagina} OFFSET {$offset}" ;
+        $query = "SELECT * FROM " . static::$tabla . " ORDER BY id $order LIMIT {$por_pagina} OFFSET {$offset}" ;
         $resultado = self::consultarSQL($query);
         return $resultado;
     }
