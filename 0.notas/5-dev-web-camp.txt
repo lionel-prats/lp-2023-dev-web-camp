@@ -32,6 +32,7 @@ todos los elementos con clase terminada en "__heading" -> class="xxx__heading"
     @include m.nombre-pagina;
 }
 
+^= -> que comienze en ...
 &= -> que termine con ...  
 *= -> que contenga ...
 
@@ -217,7 +218,7 @@ exit;
 
 ----- 
 
-* funcion PHP (a partir de version 8) para buscar un suubstring dentro de un string
+* funcion PHP (a partir de version 8) para buscar un substring dentro de un string
 * lo utilizamos en Router->render() para switchear entre las vistas del dashboard de administrador y el resto de las vistas de la app 
 * retorna un bool vvv
 

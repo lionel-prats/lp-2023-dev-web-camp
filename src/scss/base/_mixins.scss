@@ -74,6 +74,14 @@
     text-align: center;
 }
 
+@mixin descripcion-pagina {
+    margin-bottom: 5rem;
+    font-size: 1.8rem;
+    font-weight: v.$delgada;
+    text-align: center;
+    color: v.$gris-oscuro;
+}
+
 @mixin texto-fluido($min, $max) { /* font-size responsive - VIDEO 681 */
     font-size: clamp($min, 10vw,$max);
 }

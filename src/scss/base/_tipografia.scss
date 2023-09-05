@@ -18,7 +18,11 @@ h3 {
     text-align: center;
 }
 
-// todos los elementos con clase terminada en "__heading" -> class="xxx__heading"
+// todos los elementos con clase terminada en "__heading" -> class="xxx__heading" (VIDEO 674)
 [class$="__heading"] {
     @include m.nombre-pagina;
+}
+
+[class$="__descripcion"] {
+    @include m.descripcion-pagina;
 }
