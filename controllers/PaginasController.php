@@ -16,7 +16,7 @@ class PaginasController {
     }
     public static function paquetes(Router $router) {
         $router->render("paginas/paquetes", [
-            "titulo" => "Paquetes DevWebCamp"
+            "titulo" => "Sobre DevWebCamp"
         ]);
     }
     public static function conferencias(Router $router) {

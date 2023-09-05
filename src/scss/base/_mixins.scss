@@ -187,3 +187,16 @@
         color: v.$blanco;
     }
 }
+
+@mixin card {
+    padding: 3rem;
+    border: 1px solid lighten(v.$gris, 10);
+
+    // representa el nombre de la clase donde importemos este mixin += __nombre 
+    // Ej. .paquete__nombre, .ponente__nombre (VIDEO 757)
+    &__nombre {
+        margin: 2rem 0;
+        font-size: 2.6rem;
+        font-weight: v.$black;
+    }
+}

@@ -1,0 +1,49 @@
+@use "base/variables" as v;
+@use "base/mixins" as m;
+
+.paquetes {
+
+    &__grid {
+
+        @include m.contenedor;
+        @include m.grid(1, 3rem);
+        
+        @include m.tablet {
+            @include m.grid(3, 3rem);
+            align-items: flex-start; // para que las cards ajusten el height a su contenido y se posicionen desde el borde superior del contenedor grid
+        };
+
+    }
+}
+
+.paquete {
+    
+    
+    // capturo la 2da card (Pase presencial) (http://localhost:3000/paquetes) para posicionarla 1 en la vista mobile (funciona porque el contenedor tiene un display: grid)
+    &:nth-child(2) {
+        order: -2;
+        @include m.tablet {
+            order: unset; // a partir de los 768 px. elimino el valor que pueda tener seteado previamente para quela card  vuelva a su posicion original segun el HTML, ya que por experiencia de usuario en una tabla horizontal el usuario siempre va a mirar primero la info del medio (VIDEO 757)
+        };
+    }
+    
+    &:nth-child(3) {
+        order: -1;
+        @include m.tablet {
+            order: unset
+        };
+    }
+    
+    @include m.card;
+    &__lista {
+        @include m.reset-lista;
+        line-height: 2;
+    }
+    &__precio {
+        margin: 3rem 0 0 0 ;
+        font-size: 6rem;
+        font-weight: v.$black;
+        text-align: center;
+        color: v.$azul;
+    }
+}
