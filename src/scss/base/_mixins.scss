@@ -83,7 +83,7 @@
 }
 
 @mixin texto-fluido($min, $max) { /* font-size responsive - VIDEO 681 */
-    font-size: clamp($min, 10vw,$max);
+    font-size: clamp($min, 10vw, $max);
 }
 
 @mixin texto-degradado($inicio, $final) { /* degradado en los caracteres del logo - VIDEO 682 */

@@ -1,0 +1,36 @@
+@use "base/variables" as v;
+@use "base/mixins" as m;
+
+.agenda {
+    border: 1px solid #000000;
+    @include m.contenedor;
+    padding: 5rem 0;
+}
+
+.eventos {
+
+    $modificador: &; // variable temporal (VIDEO 758)
+
+    &__heading {
+        margin: 5rem 0;
+
+        // tamaño de fuente fluida, entre 2rem y 6rem
+        font-size: clamp(2rem, -.8rem + 8vw, 6rem);
+        
+        text-align: left;
+        color: v.$azul;
+    }
+    &__fecha {
+        margin: 3rem 0 1rem 0;
+        color: v.$gris;
+    }
+
+    &--workshops {
+        background-color: salmon;
+
+        // de esta forma invocando la variable temporal declarada mas arriba modifico la clase eventos__heading pese a estar dentro del bloque eventos--workshops (VIDEO 758)
+        #{$modificador}__heading {
+            color: v.$secundario;
+        }
+    }
+}
