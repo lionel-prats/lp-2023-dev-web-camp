@@ -59,7 +59,7 @@
         <p class="formulario__texto">ImagenActual:</p>
         <div class="formulario__imagen">
 
-            <!-- si el navegador sopórta .webp (hoy practicamente todos) se va a cargar la version .webp ganando en performance ya que este formato es mucho mas liviando que el formato .png (VIDEO 713) -->
+            <!-- si el navegador soporta .webp (hoy practicamente todos) se va a cargar la version .webp ganando en performance ya que este formato es mucho mas liviando que el formato .png (VIDEO 713) -->
             <picture>
                 <source srcset="<?php echo $_ENV['HOST'] . '/img/speakers/' . $ponente->imagen_actual; ?>.webp" type="image/webp">
                 <source srcset="<?php echo $_ENV['HOST'] . '/img/speakers/' . $ponente->imagen_actual; ?>.png" type="image/png">

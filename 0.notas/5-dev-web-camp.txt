@@ -413,3 +413,27 @@ while(listadoPonentes.firstChild) {
     listadoPonentes.removeChild(listadoPonentes.firstChild);
     // listadoTareas.firstChild.remove();
 }
+
+----- 
+
+VIDEO 761 
+
+SWIPER -> libreria JS para implementar sliders
+https://swiperjs.com/
+
+(hay PDF descargado sobre lo que es un CDN)
+
+----- 
+
+VIDEO 762
+
+Webpack -> module bundler (ver explicacion en PDF descargado)
+https://webpack.js.org/
+
+npm install webpack-stream 
+* ya incluye Webpack
+* nos va a evitar una gran configuracion de webpack
+
+En este video explica como integrar weback al proyecto, y a partir de webpack, como integrar swiper para los sliders 
+
+-----
