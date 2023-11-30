@@ -2,7 +2,6 @@
 @use "base/mixins" as m;
 
 .agenda {
-    border: 1px solid #000000;
     @include m.contenedor;
     padding: 5rem 0;
 }
@@ -26,11 +25,16 @@
     }
 
     &--workshops {
-        background-color: salmon;
-
         // de esta forma invocando la variable temporal declarada mas arriba modifico la clase eventos__heading pese a estar dentro del bloque eventos--workshops (VIDEO 758)
         #{$modificador}__heading {
             color: v.$secundario;
+        }
+
+        .evento__informacion {
+            background-color: v.$secundario;
+            &:hover {
+                background-color: darken(v.$secundario, 10%);
+            }
         }
     }
 
@@ -41,7 +45,6 @@
 }
 
 .evento {
-    border: red solid 1px;
     &__hora {
         font-weight: v.$bold;
     }
