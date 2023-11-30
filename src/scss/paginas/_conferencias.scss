@@ -33,6 +33,11 @@
             color: v.$secundario;
         }
     }
+
+    .swiper-button-next, 
+    .swiper-button-prev {
+        color: rgba(v.$blanco, .5);
+    }
 }
 
 .evento {
@@ -50,6 +55,18 @@
             background-color: darken(v.$azul, 10%);
         }
     }
+
+    &__nombre {
+        
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        
+        margin: 0;
+        font-size: 2rem;
+    }
+
     &__introduccion {
         // VIDEO 760 -> para limitar la cantidad de lineas del parrafo que se muestra
         display: -webkit-box;

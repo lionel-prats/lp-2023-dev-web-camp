@@ -437,3 +437,9 @@ npm install webpack-stream
 En este video explica como integrar weback al proyecto, y a partir de webpack, como integrar swiper para los sliders 
 
 -----
+
+VIDEO 763
+
+npm i -D css-loader style-loader 
+* instalacion de dependencias de desarrollo para que la libreria js swiper funcione correctamente 
+
