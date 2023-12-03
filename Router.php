@@ -51,7 +51,7 @@ class Router
         }
 
         ob_start(); // inicia un almacenamiento en memoria del contenido del include_once de $view de la linea de abajo (repaso del VIDEO 401)
-    
+        
         include_once __DIR__ . "/views/$view.php";
 
         // en $contenindo almacenamos la "ejecucion" de ob_start(), o sea, el include_once de $view en la linea de arriba (repaso del VIDEO 401)

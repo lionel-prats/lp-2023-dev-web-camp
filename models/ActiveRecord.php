@@ -171,9 +171,12 @@ class ActiveRecord {
     }
     
     // Retorna el total de registros de una tabla
-    public static function total() : int {
+    public static function total($columna = "", $valor = "") : int {
         
         $query = "SELECT COUNT(*) FROM " . static::$tabla;
+        if($columna) {
+            $query .= " WHERE $columna = $valor";
+        }
         
         $resultado = self::$db->query($query);
 

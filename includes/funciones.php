@@ -13,7 +13,8 @@ function s($html) : string {
 }
 
 function pagina_actual($path) : bool {
-    return str_contains($_SERVER["PATH_INFO"], $path); 
+    // $_SERVER["PATH_INFO"] no existe cuando estoy en el home, entonces uso un ternario para que no rompa el home al invocarse a la funcion pagina_actual en header.php (VIDEO 766)
+    return str_contains($_SERVER["PATH_INFO"] ?? "/", $path); 
 }
 
 // Verifica si el usuario está autenticado (logueado)

@@ -1,4 +1,5 @@
-@forward 'auth';
-@forward 'devwebcamp';
-@forward 'paquetes';
-@forward 'conferencias';
+@forward 'auth'; // apunta a /src/scss/paginas/_auth.scss
+@forward 'devwebcamp'; // apunta a /src/scss/paginas/_devwebcamp.scss
+@forward 'paquetes'; // apunta a /src/scss/paginas/_paquetes.scss
+@forward 'conferencias'; // apunta a /src/scss/paginas/_conferencias.scss
+@forward 'inicio'; // apunta a /src/scss/paginas/inicio/ (sass al no encontrar _inicio.scss busca una carpeta llamada "inicio")

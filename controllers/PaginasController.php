@@ -6,12 +6,54 @@ use Model\Hora;
 use MVC\Router;
 use Model\Evento;
 use Model\Ponente;
+use Model\Usuario;
 use Model\Categoria;
 
 class PaginasController {
     public static function index(Router $router) {
+
+        // SELECT * from eventos order by hora_id ASC 
+        $eventos = Evento::ordenar("hora_id", "ASC");
+        $eventos_formateados = [];
+        foreach($eventos as $evento) {
+            # a cada opbjeto evento iterado, le agrego un objeto con cada una de las FK
+            $evento->categoria = Categoria::find($evento->categoria_id);
+            $evento->dia = Dia::find($evento->dia_id);
+            $evento->hora = Hora::find($evento->hora_id);
+            $evento->ponente = Ponente::find($evento->ponente_id);
+            
+            if ($evento->dia_id === "1" && $evento->categoria_id === "1"){
+                # conferencias del viernes 
+                $eventos_formateados["conferencias_v"][] = $evento;
+            } 
+            if ($evento->dia_id === "2" && $evento->categoria_id === "1"){
+                # conferencias del sabado 
+                $eventos_formateados["conferencias_s"][] = $evento;
+            } 
+            if ($evento->dia_id === "1" && $evento->categoria_id === "2"){
+                # workshops del viernes 
+                $eventos_formateados["workshops_v"][] = $evento;
+            } 
+            if ($evento->dia_id === "2" && $evento->categoria_id === "2"){
+                # workshops del sabado 
+                $eventos_formateados["workshops_s"][] = $evento;
+            } 
+        }
+
+        // obtener el total de cada bloque
+        $ponentes = Ponente::total();
+        $conferencias = Evento::total("categoria_id", 1);
+        $workshops = Evento::total("categoria_id", 2);
+        $asistentes = Usuario::total("admin", 0);
+        
+
         $router->render("paginas/index", [
-            "titulo" => "Inicio"
+            "titulo" => "Inicio",
+            "eventos" => $eventos_formateados,
+            "ponentes" => $ponentes,
+            "conferencias" => $conferencias,
+            "workshops" => $workshops,
+            "asistentes" => $asistentes
         ]);
     }
     public static function evento(Router $router) {
