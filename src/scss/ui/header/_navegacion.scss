@@ -8,15 +8,21 @@
         flex-direction: row;
     };
     &__enlace {
+        // border: 1px solid #000000;
         padding: 2rem;
-        font-size: 2.2rem;
+        font-size: 1.65rem;
         font-weight: v.$black;
         text-transform: uppercase;
         text-align: center;
         color: v.$blanco;
+        @include m.xl_desktop {
+            font-size: 2rem;
+        };
+        &--actual,
         &:hover {
             background-color: v.$blanco;
             color: v.$azul;
         }
+        
     }
 }

@@ -26,11 +26,29 @@ class PaginasController {
     }
     public static function conferencias(Router $router) {
 
+        // SELECT * from eventos order by hora_id ASC 
         $eventos = Evento::ordenar("hora_id", "ASC");
 
+        /*  
+        $eventos_formateados = [
+            "conferencias_v" => [
+                (), ()
+            ],
+            "conferencias_s" => [
+                (), ()
+            ],
+            "workshops_v" => [
+                (), ()
+            ],
+            "workshops_s" => [
+                (), ()
+            ]
+        */
         $eventos_formateados = [];
+
         foreach($eventos as $evento) {
 
+            # a cada opbjeto evento iterado, le agrego un objeto con cada una de las FK
             $evento->categoria = Categoria::find($evento->categoria_id);
             $evento->dia = Dia::find($evento->dia_id);
             $evento->hora = Hora::find($evento->hora_id);

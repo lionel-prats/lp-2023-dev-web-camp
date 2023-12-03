@@ -1,4 +1,4 @@
-import Swiper from 'swiper'; 
+import Swiper from 'swiper'; // libreria para generar sliders con js y css - ver notas (VIDEO 763)
 import { Navigation } from 'swiper/modules'; 
 import 'swiper/css'; 
 import 'swiper/css/navigation';

@@ -96,6 +96,7 @@
 @mixin logo {
     margin-bottom: 2rem;
     text-align: center;
+    white-space: nowrap; // VIDEO 765 - efecto visual en el logo del header en anchos angostos
     color: v.$blanco;
     @include desktop {
         margin: 0;
