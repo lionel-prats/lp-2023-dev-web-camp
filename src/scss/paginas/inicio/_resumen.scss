@@ -2,7 +2,7 @@
 @use "base/mixins" as m;
 
 .resumen {
-    border: 1px solid #000000;
+    // border: 1px solid #000000;
     
     padding: 12rem 0;
 
@@ -22,7 +22,7 @@
     // implementado en el VIDEO 766 (referencia a estas opciones en VIDEO 680)
 
     &__grid {
-        border: 1px solid red;
+        // border: 1px solid red;
         @include m.contenedor;
         @include m.grid(1, 5rem);
         @include m.tablet {
@@ -32,7 +32,7 @@
     }
 
     &__bloque {
-        border: 1px solid rgb(0, 255, 0);
+        // border: 1px solid rgb(0, 255, 0);
         text-align: center;
         color: v.$blanco;
     }
